@@ -1,2 +1,9 @@
 # FMCG_marketing_mix_modelling
-This is a complete project on marketing mix modelling
+This is a complete project on marketing mix modelling, constitute of three parts
+
+Data transformation
+Modelling
+Visualization + Presentation
+
+Data is anonymized
+
