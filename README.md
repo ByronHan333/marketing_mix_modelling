@@ -1,6 +1,6 @@
 # Marketing Mix Modelling project
-This is an end-to-end project on marketing mix modelling of a consumer product's marketing activities and environment activities between 2014 and 2018.
-This project includes data ETL, model optimization, side diagonistic, business insight and budget optimization.
+This is an end-to-end project on marketing mix modelling of a consumer product's marketing activities and environment activities between 2014 and 2018. <br />
+This project includes data ETL, model optimization, side diagonistic, business insight and budget optimization. <br />
 
 ## TLDR for HR
 * Collected, aggreagted, cleaned data using MySQL to manage ETL process. [Data Preprocess](#data-preprocess)
@@ -24,6 +24,7 @@ This project includes data ETL, model optimization, side diagonistic, business i
 ## Goal
 
 ## Data Description
+* 
 
 ## Data Preprocess
 
