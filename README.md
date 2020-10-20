@@ -12,7 +12,7 @@ This project includes data ETL, model optimization, side diagonistic, business i
 * Created presentation deck to summarize model findings and presented result to marketing team
 
 ## Table of Content
-* Goal
+* [Goal](#Goal)
 * Data Description
 * Data Preprocess
 * Modelling
