@@ -1,5 +1,5 @@
-# Marketing_Mix_Modelling
-This is a complete project on marketing mix modelling of a consumer product marketing activities and environment activities between 2014 and 2018.
+# Marketing Mix Modelling project
+This is a complete project on marketing mix modelling of a consumer product's marketing activities and environment activities between 2014 and 2018.
 
 In this project, I have:
 
