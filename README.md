@@ -25,27 +25,32 @@ This project includes data ETL, model optimization, side diagonistic, business i
 ## Goal
 
 ## Data Description
-data has been limited to header and 1 line of encoded value
+Data [link]() has been limited to header and 1 line of encoded value.
 * Sales
-    - [MMM_Sales_Raw.csv]()
+    - MMM_Sales_Raw.csv
 * Marketing activity
-    - [MMM_AdWordsSearch_2015.csv]()
-    - [MMM_AdWordsSearch_2017.csv]()
-    - [MMM_DCMDisplay_2015.csv]()
-    - [MMM_DCMDisplay_2017.csv]()
-    - [MMM_Event.csv]()
-    - [MMM_Facebook.csv]()
-    - [MMM_Offline_TV_Magazine.csv]()
-    - [MMM_Wechat.csv]()
+    - MMM_AdWordsSearch_2015.csv
+    - MMM_AdWordsSearch_2017.csv
+    - MMM_DCMDisplay_2015.csv
+    - MMM_DCMDisplay_2017.csv
+    - MMM_Event.csv
+    - MMM_Facebook.csv
+    - MMM_Offline_TV_Magazine.csv
+    - MMM_Wechat.csv
 * Competitor
-    - [MMM_Comp_Media_Spend.csv]()
+    - MMM_Comp_Media_Spend.csv
 * Environment (could include market specific) 
 * Other
-    - [MMM_Date_Metadata.csv]() 
-    - [MMM_DMA_HH.csv]() 
+    - MMM_Date_Metadata.csv
+    - MMM_DMA_HH.csv
 
 
 ## Data Preprocess
+* To make ETL more robust, I assume 2015-data is preloaded and 2017-data which has 6-month overlap is added later.
+* Each channel has 1-3 drivers to reduce model collinearity and for simplicity of this project.
+* Dependent variables (sales volume) and independent variables (drivers of growth) are aggregated on weekly level to reduce daily noise.
+* Special event such as Black-Friday/Christmas/July-4th are later added in modelling stage.
+
 
 ## Modelling
 
