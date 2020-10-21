@@ -25,10 +25,10 @@ This project includes data ETL, model optimization, side diagonistic, business i
 ## Goal
 
 ## Data Description
-data has been limited to header and 1 line of encoded data
-* Sales data
+data has been limited to header and 1 line of encoded value
+* Sales
     - [MMM_Sales_Raw.csv]()
-* Marketing activity data
+* Marketing activity
     - [MMM_AdWordsSearch_2015.csv]()
     - [MMM_AdWordsSearch_2017.csv]()
     - [MMM_DCMDisplay_2015.csv]()
@@ -37,9 +37,9 @@ data has been limited to header and 1 line of encoded data
     - [MMM_Facebook.csv]()
     - [MMM_Offline_TV_Magazine.csv]()
     - [MMM_Wechat.csv]()
-* Competitor data
+* Competitor
     - [MMM_Comp_Media_Spend.csv]()
-* Environment data (could include market specific) 
+* Environment (could include market specific) 
 * Other
     - [MMM_Date_Metadata.csv]() 
     - [MMM_DMA_HH.csv]() 
