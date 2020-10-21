@@ -25,7 +25,7 @@ This project includes data ETL, model optimization, side diagonistic, business i
 ## Goal
 
 ## Data Description
-Data [link]() has been limited to header and 1 line of encoded value.
+Data [(link)]() has been limited to header and 1 line of encoded value.
 * Sales
     - MMM_Sales_Raw.csv
 * Marketing activity
