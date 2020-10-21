@@ -3,7 +3,7 @@ This is an end-to-end project on marketing mix modelling of a consumer product's
  \
 This project includes data ETL, model optimization, side diagonistic, business insight and budget optimization. <br />
 
-## TLDR for HR
+## TLDR
 * Collected, aggreagted, cleaned data using MySQL to manage ETL process.
 * Created EDA data visualizaiton using Tableau.
 * Performed multivariate regression models using R to evaluate marketing tactics impact.
