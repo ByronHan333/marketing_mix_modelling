@@ -46,7 +46,7 @@ Data [(link)]() is limited to header and 1 line of encoded value.
 
 
 ## Data Preprocess
-MySQL to aggregate all files together [(code)](https://../MySQL/data_preprocess.sql).
+MySQL to aggregate all files together [(code)](https://./MySQL/data_preprocess.sql).
 * To make ETL more robust, I assume 2015-data is preloaded and 2017-data which has 6-month overlap is added later.
 * I only selected 1-3 drivers for each channel to reduce model collinearity and simplicity of this project.
 * Dependent variables (sales volume) and independent variables (drivers of growth) are aggregated on weekly level to reduce daily noise.
