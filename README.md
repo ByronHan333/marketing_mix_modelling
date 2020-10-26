@@ -57,14 +57,23 @@ MySQL to aggregate all files together [(code)](MySQL/data_preprocess.sql).
 ## Pre-Modelling EDA & Data Transformation
 * EDA visualization in R [(selected code)](R/selected_eda.R). 
 * Adding Lag, Decay to 6 selected marketing channels, apply Power curve [(R)]() [(Python)]().
+* Advertising intensity, competitive interference and wear-out impacts on advertising effectiveness, but for simiplicity we only look at:
+    - Lag
+    - Decay
+    - Diminishing return (Power curve)
 
 EDA plot 1             |  EDA plot 2
 :-------------------------:|:-------------------------:
 This plot shows sales highly correlated to sales event | This plot shows the correlation between sales and all variables
  ![](plot/eda_sales_period.png)  |  ![](plot/eda_correlation_matrix.png)
+* Adstock's lag effect is firstly estimated using: At = At-1
+* Adstock's decay effect is secondly expressed using one carry-over model: At =  At * Decay + At-1 * (1 - Decay)
+* Adstock's diminishing return effect is estimated using: At = At ** Power(Alpha)
 * Details for Decay, Lag & Alpha in power curve.
     - Traditional media normally has higher lag.
     - Online media noramlly has high decay.
+    - More other decay models can be found [here](https://mpra.ub.uni-muenchen.de/7683/4/MPRA_paper_7683.pdf) or other online resources.
+    - More other diminishin return models can be found [here](https://www.lexjansen.com/nesug/nesug08/sa/sa03.pdf) or other online resources.
 
 |             |    Decay    | Lag | Alpha |
 |:-----------:|:-----------:|:---:|:-----:|
