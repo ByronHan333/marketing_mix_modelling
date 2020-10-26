@@ -54,7 +54,7 @@ MySQL to aggregate all files together [(code)](MySQL/data_preprocess.sql).
 * Other detail can be found in sql notes
 
 
-## Modelling
+## Pre-Modelling EDA & Data Transformation
 * EDA visualization in R [(selected code)](). 
 * Adding Lag, Decay to 6 selected marketing channels, apply Power curve [(R)]() [(Python)]().
 
