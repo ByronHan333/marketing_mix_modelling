@@ -58,7 +58,7 @@ MySQL to aggregate all files together [(code)](MySQL/data_preprocess.sql).
 * EDA visualization in R [(selected code)](). 
 * Adding Lag, Decay to 6 selected marketing channels, apply Power curve [(R)]() [(Python)]().
 
-Solarized dark             |  Solarized Ocean
+EDA plot 1             |  EDA plot 2
 :-------------------------:|:-------------------------:
 This plot shows sales highly correlated to sales event | This plot shows the correlation between sales and all variables
  ![](plot/eda_sales_period.png)  |  ![](plot/eda_correlation_matrix.png)
