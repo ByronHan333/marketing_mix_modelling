@@ -55,7 +55,7 @@ MySQL to aggregate all files together [code](https://github.com/ByronHan333/mark
 
 
 ## Modelling
-EDA visualization in R [selected code]().
+EDA visualization in R [selected code](). \
 Adding Lag, Decay to 6 selected marketing channels, apply Power curve [R]() [Python]().
 
 |             |    Decay    | Lag | Alpha |
