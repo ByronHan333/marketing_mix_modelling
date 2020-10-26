@@ -46,7 +46,7 @@ Data [(link)]() has been limited to header and 1 line of encoded value.
 
 
 ## Data Preprocess
-MySQL [code](https://github.com/ByronHan333/marketing_mix_modelling/blob/main/MySQL/data_preprocess.sql)
+MySQL to aggregate all files together [code](https://github.com/ByronHan333/marketing_mix_modelling/blob/main/MySQL/data_preprocess.sql)
 * To make ETL more robust, I assume 2015-data is preloaded and 2017-data which has 6-month overlap is added later.
 * Each channel has 1-3 drivers to reduce model collinearity and for simplicity of this project.
 * Dependent variables (sales volume) and independent variables (drivers of growth) are aggregated on weekly level to reduce daily noise.
@@ -55,6 +55,24 @@ MySQL [code](https://github.com/ByronHan333/marketing_mix_modelling/blob/main/My
 
 
 ## Modelling
+EDA visualization in R [selected code]().
+Adding Lag, Decay to 6 selected marketing channels, apply Power curve [R]() [Python]().
+
+|             |    Decay    | Lag | Alpha |
+|:-----------:|:-----------:|:---:|:-----:|
+| National TV |     0.8     |  0  |  0.9  |
+| National TV |     0.8     |  2  |  0.6  |
+|   Magazine  |     0.7     |  1  |  0.6  |
+|   Magazine  |     0.9     |  1  |  0.6  |
+| Paid Search |     0.9     |  0  |   1   |
+| Paid Search |     0.9     |  1  |  0.7  |
+|   Display   |     0.8     |  0  |  0.8  |
+|   Display   |      1      |  0  |   1   |
+|   Facebook  |      1      |  0  |  0.8  |
+|   Facebook  |      1      |  1  |   1   |
+|    Wechat   |     0.8     |  0  |  0.9  |
+|    Wechat   |     0.9     |  1  |   1   |
+
 
 ## Visualization
 
