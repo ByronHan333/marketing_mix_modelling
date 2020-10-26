@@ -55,8 +55,8 @@ MySQL to aggregate all files together [(code)](MySQL/data_preprocess.sql).
 
 
 ## Modelling
-EDA visualization in R [(selected code)](). \
-Adding Lag, Decay to 6 selected marketing channels, apply Power curve [(R)]() [(Python)]().
+* EDA visualization in R [(selected code)](). \
+* Adding Lag, Decay to 6 selected marketing channels, apply Power curve [(R)]() [(Python)]().
 
 Solarized dark             |  Solarized Ocean
 :-------------------------:|:-------------------------:
