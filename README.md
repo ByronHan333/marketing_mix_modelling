@@ -60,7 +60,7 @@ Adding Lag, Decay to 6 selected marketing channels, apply Power curve [(R)]() [(
 
 Solarized dark             |  Solarized Ocean
 :-------------------------:|:-------------------------:
-![](https://../plot/eda_correlation_matrix.png)  |  ![](https://../plot/eda_sales_period.png)
+![](plot/eda_correlation_matrix.png)  |  ![](plot/eda_sales_period.png)
 
 
 |             |    Decay    | Lag | Alpha |
