@@ -25,7 +25,7 @@ This project includes data ETL, model optimization, side diagonistic, business i
 ## Goal
 
 ## Data Description
-Data [(link)]() has been limited to header and 1 line of encoded value.
+Data [(link)]() is limited to header and 1 line of encoded value.
 * Sales
     - MMM_Sales_Raw.csv
 * Marketing activity
@@ -46,9 +46,9 @@ Data [(link)]() has been limited to header and 1 line of encoded value.
 
 
 ## Data Preprocess
-MySQL to aggregate all files together [(code)](https://github.com/ByronHan333/marketing_mix_modelling/blob/main/MySQL/data_preprocess.sql).
+MySQL to aggregate all files together [(code)](https://../MySQL/data_preprocess.sql).
 * To make ETL more robust, I assume 2015-data is preloaded and 2017-data which has 6-month overlap is added later.
-* Each channel has 1-3 drivers to reduce model collinearity and for simplicity of this project.
+* I only selected 1-3 drivers for each channel to reduce model collinearity and simplicity of this project.
 * Dependent variables (sales volume) and independent variables (drivers of growth) are aggregated on weekly level to reduce daily noise.
 * Special event such as Black-Friday/Christmas/July-4th are later added in modelling stage.
 * Other detail can be found in sql notes
@@ -57,6 +57,11 @@ MySQL to aggregate all files together [(code)](https://github.com/ByronHan333/ma
 ## Modelling
 EDA visualization in R [(selected code)](). \
 Adding Lag, Decay to 6 selected marketing channels, apply Power curve [(R)]() [(Python)]().
+
+Solarized dark             |  Solarized Ocean
+:-------------------------:|:-------------------------:
+![](https://../plot/eda_correlation_matrix.png)  |  ![](https://../plot/eda_sales_period.png)
+
 
 |             |    Decay    | Lag | Alpha |
 |:-----------:|:-----------:|:---:|:-----:|
