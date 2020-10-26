@@ -67,9 +67,7 @@ EDA plot 1             |  EDA plot 2
 This plot shows sales highly correlated to sales event | This plot shows the correlation between sales and all variables
  ![](plot/eda_sales_period.png)  |  ![](plot/eda_correlation_matrix.png)
 * Adstock's lag effect is firstly estimated using: 
-$$
-A_{t} = A_{t-lag}  
-$$
+    - A_{t} = A_{t-lag}  
 * Adstock's decay effect is secondly expressed using one carry-over model: At =  At * Decay + At-1 * (1 - Decay)
 * Adstock's diminishing return effect is estimated using: At = At ** Power(Alpha)
 * Details for Decay, Lag & Alpha in power curve.
