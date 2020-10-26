@@ -1,2 +1,2 @@
 date_id,AdGroupId,AdGroupName,site_name,exchange_name,campaign_advertiser,campaign_budget,campaign_id,campaign_name,keywordid,keyword_name,device_id,device_browser,match_type,keyword_quality_score,position,impressions,CTR,clicks,currency
-8/1/16,2,Shoulder Bag,Google Search Network,Google Search,camp_1,3500,4,Mobile Always-On,4,#NAME?,2,Mobile devices with full browsers,Broad,8,1.9,644337,1.97,12693,USD
+8/1/16,2,Shoulder Bag,Google Search Network,Google Search,camp_1,99,4,Mobile Always-On,4,#NAME?,2,Mobile devices with full browsers,Broad,8,1.9,9999,1.97,999,USD
