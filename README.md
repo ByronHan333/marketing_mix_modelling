@@ -63,11 +63,13 @@ Solarized dark             |  Solarized Ocean
 This plot shows sales highly correlated to sales event | This plot shows the correlation between sales and all variables
  ![](plot/eda_sales_period.png)  |  ![](plot/eda_correlation_matrix.png)
 * Details for Decay, Lag & Alpha in power curve.
+    - Traditional media normally has higher lag.
+    - Online media noramlly has high decay.
 
 |             |    Decay    | Lag | Alpha |
 |:-----------:|:-----------:|:---:|:-----:|
 | National TV |     0.8     |  0  |  0.9  |
-| National TV |     0.8     |  2  |  0.6  |
+| National TV |     0.8     |  1  |  0.6  |
 |   Magazine  |     0.7     |  1  |  0.6  |
 |   Magazine  |     0.9     |  1  |  0.6  |
 | Paid Search |     0.9     |  0  |   1   |
@@ -80,7 +82,7 @@ This plot shows sales highly correlated to sales event | This plot shows the cor
 |    Wechat   |     0.9     |  1  |   1   |
 
 
-## Visualization
+## Modelling & Visualization
 
 ## Evaluation & Side Diagonistic
 
