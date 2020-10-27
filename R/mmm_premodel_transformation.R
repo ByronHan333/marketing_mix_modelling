@@ -19,7 +19,6 @@ df$Month <- as.Date(df$Month, format = '%m/%d/%Y')
 var <- c('National.TV.GRPs', 'Magazine.GRPs', 'Paid.Search', 'Display', 'Facebook.Impressions', 'Wechat')
 df.selected.columns <- df[var]
 
-data.frame("SN" = 1:2, "Age" = c(21,15), "Name" = c("John","Dora"))
 
 # next time create data frame to store these value
 # data.frame('channel'=c('tv','magazine','paid.search','display','facebook','wechat'))
@@ -68,6 +67,8 @@ wechat.pow2 <- 1
 
 
 transformation <- function(dataframe, transformation.type, transformation.type.index, transformation.constant, column.name) {
+  ## ============== function explanation ==============
+  ## This function performs lag, power and decay transformation
   ## ============== function parameter explanation ==============
   ## dataframe: input dataframe
   ## transformation.type: lag, decay or power
@@ -81,20 +82,20 @@ transformation <- function(dataframe, transformation.type, transformation.type.i
     d <- dataframe %>%
       # post: https://sebastiansauer.github.io/prop_fav/#:~:text=The%20double%20exclamation%20mark%20is,out%20of%20a%20data%20frame.
       # post: https://stackoverflow.com/questions/32077483/colons-equals-operator-in-r-new-syntax#:~:text=In%20this%20case%2C%20%3A%3D%20is,to%20use%20in%20this%20context.
-      transmute(dataframe, !!absolute.column := lag(dataframe[[column.name]], transformation.constant, default=0)) # data pipeline to create new column
+      mutate(dataframe, !!absolute.column := lag(dataframe[[column.name]], transformation.constant, default=0)) # data pipeline to create new column
     return (d)
   ## if need decay
   } else if (tolower(transformation.type)=='decay') {
     absolute.column <- paste0(c(column.name, transformation.type, transformation.type.index), collapse = '.')
     # post: https://stackoverflow.com/questions/64414257/how-to-add-new-column-and-calculate-recursive-cum-using-dplyr-and-shift/
     d <- dataframe %>%
-      transmute(dataframe, !!absolute.column := purrr::accumulate(dataframe[[column.name]], ~.x * (1-transformation.constant) +  .y*transformation.constant))
+      mutate(dataframe, !!absolute.column := purrr::accumulate(dataframe[[column.name]], ~.x * (1-transformation.constant) +  .y*transformation.constant))
     return (d)
   ## if need power
   } else if (tolower(transformation.type)=='power') {
     absolute.column <- paste0(c(column.name, transformation.type, transformation.type.index), collapse = '.')
     d <- dataframe %>%
-      transmute(dataframe, !!absolute.column := dataframe[[column.name]] ** transformation.constant)
+      mutate(dataframe, !!absolute.column := dataframe[[column.name]] ** transformation.constant)
     return (d)
   } else {
     print("ONLY LAG, DECAY, POWER SUPPORTED")
@@ -102,16 +103,40 @@ transformation <- function(dataframe, transformation.type, transformation.type.i
   }
 }
 
+transformaton_sequence <- function(dataframe, sequence, sequence.indices, values, column.name) {
+  ## ============== function explanation ==============
+  ## This function performs a sequence of lag, power and decay transformation using transform
+  ## ============== function parameter explanation ==============
+  ## dataframe: input dataframe
+  ## sequence: sequence of trasnformation
+  ## sequence.indices: index number of the transformation
+  ## values: value of transformation action
+  ## column.name: name of column transformation operates on
+  
+  tmp <- copy(dataframe)
+  ## 1st transformation
+  tmp <- transformation(tmp, sequence[1], sequence.indices[1], values[1], column.name)
+  first.transformation.column.name <- paste0(c(column.name, sequence[1], sequence.indices[1]), collapse = '.')
+  ## 2nd transformation
+  tmp <- transformation(tmp, sequence[2], sequence.indices[2], values[2], first.transformation.column.name)
+  second.transformation.column.name <- paste0(c(first.transformation.column.name, sequence[2], sequence.indices[2]), collapse = '.')
+  ## 3rd transformation
+  tmp <- transformation(tmp, sequence[3], sequence.indices[3], values[3], second.transformation.column.name)
+  third.transformation.column.name <- paste0(c(second.transformation.column.name, sequence[3], sequence.indices[3]), collapse = '.')
+  
+  return (select(tmp, first.transformation.column.name, second.transformation.column.name, third.transformation.column.name))
+}
 
 
-## test 
-ok.1 <- transformation(df.selected.columns, 'lag', 1, 1, 'National.TV.GRPs')
-ok.2 <- transformation(ok.1, 'power', 1, 0.8, 'National.TV.GRPs.lag.1')
-transformation(ok.2, 'decay', 1, 0.4, 'National.TV.GRPs.lag.1.power.1')
 
+# test pass
+transformaton_sequence(df.selected.columns, c('lag','power','decay'), c(1,1,1), c(1,.8,.4), 'National.TV.GRPs')
 
-ok.1
-
+## test pass 
+df.selected.columns
+df.selected.columns <- transformation(df.selected.columns, 'lag', 1, 1, 'National.TV.GRPs')
+df.selected.columns <- transformation(df.selected.columns, 'power', 1, 0.8, 'National.TV.GRPs.lag.1')
+df.selected.columns <- transformation(df.selected.columns, 'decay', 1, 0.4, 'National.TV.GRPs.lag.1.power.1')
 
 
 
