@@ -19,7 +19,12 @@ df$Month <- as.Date(df$Month, format = '%m/%d/%Y')
 var <- c('National.TV.GRPs', 'Magazine.GRPs', 'Paid.Search', 'Display', 'Facebook.Impressions', 'Wechat')
 df.selected.columns <- df[var]
 
+data.frame("SN" = 1:2, "Age" = c(21,15), "Name" = c("John","Dora"))
 
+# next time create data frame to store these value
+# data.frame('channel'=c('tv','magazine','paid.search','display','facebook','wechat'))
+
+# lag constant
 tv.lag1 <- 0
 tv.lag2 <- 1
 magazine.lag1 <- 1 
@@ -33,6 +38,7 @@ facebook.lag2 <- 1
 wechat.lag1 <- 0
 wechat.lag2 <- 1
 
+#decay constant
 tv.decay1 <- .8
 tv.decay2 <- .8
 magazine.decay1 <- .7 
@@ -46,6 +52,7 @@ facebook.decay2 <- 1
 wechat.decay1 <- .8
 wechat.decay2 <- .9
 
+# power constant
 tv.pow1 <- .9
 tv.pow2 <- .6
 magazine.pow1 <- .6
@@ -59,6 +66,7 @@ facebook.pow2 <- 1
 wechat.pow1 <- .9
 wechat.pow2 <- 1
 
+
 transformation <- function(dataframe, transformation.type, transformation.type.index, transformation.constant, column.name) {
   ## ============== function parameter explanation ==============
   ## dataframe: input dataframe
@@ -71,25 +79,22 @@ transformation <- function(dataframe, transformation.type, transformation.type.i
   if (tolower(transformation.type)=='lag') {
     absolute.column <- paste0(c(column.name, transformation.type, transformation.type.index), collapse = '.') # create new column name
     d <- dataframe %>%
-      # thanks to this post: https://sebastiansauer.github.io/prop_fav/#:~:text=The%20double%20exclamation%20mark%20is,out%20of%20a%20data%20frame.
-      # this post: https://stackoverflow.com/questions/32077483/colons-equals-operator-in-r-new-syntax#:~:text=In%20this%20case%2C%20%3A%3D%20is,to%20use%20in%20this%20context.
-      mutate(dataframe, !!absolute.column := lag(dataframe[[column.name]], transformation.constant, default=0)) # data pipeline to create new column
+      # post: https://sebastiansauer.github.io/prop_fav/#:~:text=The%20double%20exclamation%20mark%20is,out%20of%20a%20data%20frame.
+      # post: https://stackoverflow.com/questions/32077483/colons-equals-operator-in-r-new-syntax#:~:text=In%20this%20case%2C%20%3A%3D%20is,to%20use%20in%20this%20context.
+      transmute(dataframe, !!absolute.column := lag(dataframe[[column.name]], transformation.constant, default=0)) # data pipeline to create new column
     return (d)
   ## if need decay
   } else if (tolower(transformation.type)=='decay') {
     absolute.column <- paste0(c(column.name, transformation.type, transformation.type.index), collapse = '.')
-    # dataframe[absolute.column] <- copy(dataframe[column.name])
-    # print(dataframe[column.name])
-    # thanks to this post: https://stackoverflow.com/questions/64414257/how-to-add-new-column-and-calculate-recursive-cum-using-dplyr-and-shift/
-    
+    # post: https://stackoverflow.com/questions/64414257/how-to-add-new-column-and-calculate-recursive-cum-using-dplyr-and-shift/
     d <- dataframe %>%
-      mutate(dataframe, !!absolute.column := purrr::accumulate(dataframe[[column.name]], ~.x * (1-transformation.constant) +  .y*transformation.constant))
+      transmute(dataframe, !!absolute.column := purrr::accumulate(dataframe[[column.name]], ~.x * (1-transformation.constant) +  .y*transformation.constant))
     return (d)
   ## if need power
   } else if (tolower(transformation.type)=='power') {
     absolute.column <- paste0(c(column.name, transformation.type, transformation.type.index), collapse = '.')
     d <- dataframe %>%
-      mutate(dataframe, !!absolute.column := dataframe[[column.name]] ** transformation.constant)
+      transmute(dataframe, !!absolute.column := dataframe[[column.name]] ** transformation.constant)
     return (d)
   } else {
     print("ONLY LAG, DECAY, POWER SUPPORTED")
@@ -99,10 +104,13 @@ transformation <- function(dataframe, transformation.type, transformation.type.i
 
 
 
+## test 
+ok.1 <- transformation(df.selected.columns, 'lag', 1, 1, 'National.TV.GRPs')
+ok.2 <- transformation(ok.1, 'power', 1, 0.8, 'National.TV.GRPs.lag.1')
+transformation(ok.2, 'decay', 1, 0.4, 'National.TV.GRPs.lag.1.power.1')
 
 
-
-
+ok.1
 
 
 
@@ -163,18 +171,6 @@ df.lagged <- df.selected.columns %>%
   # magazine
   mutate(df.selected.columns, Magazine.GRPs.lag1= lag(df.selected.columns$Magazine.GRPs, magazine.lag1)) %>%
   mutate(df.selected.columns, Magazine.GRPs.lag2= lag(df.selected.columns$Magazine.GRPs, magazine.lag2)) %>%
-  # paid search
-  mutate(df.selected.columns, Paid.Search.lag1= lag(df.selected.columns$Paid.Search, paid.search.lag1)) %>%
-  mutate(df.selected.columns, Paid.Search.lag2= lag(df.selected.columns$Paid.Search, paid.search.lag2)) %>%
-  #display
-  mutate(df.selected.columns, Display.lag1= lag(df.selected.columns$Display, display.lag1)) %>%
-  mutate(df.selected.columns, Display.lag2= lag(df.selected.columns$Display, display.lag2)) %>%
-  # facebook
-  mutate(df.selected.columns, Facebook.Impressions.lag1= lag(df.selected.columns$Facebook.Impressions, facebook.lag1)) %>%
-  mutate(df.selected.columns, Facebook.Impressions.lag2= lag(df.selected.columns$Facebook.Impressions, facebook.lag2)) %>%
-  # wechat
-  mutate(df.selected.columns, Wechat.lag1= lag(df.selected.columns$Wechat, wechat.lag1)) %>%
-  mutate(df.selected.columns, Wechat.lag2= lag(df.selected.columns$Wechat, wechat.lag2)) %>%
   mutate_if(is.numeric, ~replace(., is.na(.), 0))
 
 head(df.selected.columns)
@@ -183,17 +179,6 @@ head(df.lagged)
 df.decayed <- copy(df.lagged)
 df.decayed$National.TV.GRPs.decay1 <- copy(df.decayed$National.TV.GRPs.lag1)
 df.decayed$Magazine.GRPs.decay1 <- copy(df.decayed$Magazine.GRPs.lag1)
-df.decayed$Paid.Search.decay1 <- copy(df.decayed$Paid.Search.lag1)
-df.decayed$Display.decay1 <- copy(df.decayed$Display.lag1)
-df.decayed$Facebook.Impressions.decay1 <- copy(df.decayed$Facebook.Impressions.lag1)
-df.decayed$Wechat.decay1 <- copy(df.decayed$Wechat.lag1)
-
-df.decayed$National.TV.GRPs.decay2 <- copy(df.decayed$National.TV.GRPs.lag2)
-df.decayed$Magazine.GRPs.decay2 <- copy(df.decayed$Magazine.GRPs.lag2)
-df.decayed$Paid.Search.decay2 <- copy(df.decayed$Paid.Search.lag2)
-df.decayed$Display.decay2 <- copy(df.decayed$Display.lag2)
-df.decayed$Facebook.Impressions.decay2 <- copy(df.decayed$Facebook.Impressions.lag2)
-df.decayed$Wechat.decay2 <- copy(df.decayed$Wechat.lag2)
 
 tv.decay1 = 0.2
 df.decayed <- df.decayed %>%
@@ -206,26 +191,6 @@ df.decayed <- df.decayed %>%
                     1, default = first(National.TV.GRPs.decay2)) * (1-tv.decay2) + df.lagged$National.TV.GRPs.lag2 * tv.decay2) %>%
   # magazine
   mutate(df.lagged, Magazine.GRPs.decay1= lag(df.decayed$Magazine.GRPs.decay1, 
-                    1, default = first(National.TV.GRPs.decay1)) * (1-tv.decay1) + df.lagged$National.TV.GRPs.lag1 * tv.decay1) %>%
-  mutate(df.lagged, National.TV.GRPs.decay2= lag(df.decayed$National.TV.GRPs.decay2, 
-                    1, default = first(National.TV.GRPs.decay2)) * (1-tv.decay2) + df.lagged$National.TV.GRPs.lag2 * tv.decay2) %>%
-  # paid search
-  mutate(df.lagged, National.TV.GRPs.decay1= lag(df.decayed$National.TV.GRPs.decay1, 
-                    1, default = first(National.TV.GRPs.decay1)) * (1-tv.decay1) + df.lagged$National.TV.GRPs.lag1 * tv.decay1) %>%
-  mutate(df.lagged, National.TV.GRPs.decay2= lag(df.decayed$National.TV.GRPs.decay2, 
-                    1, default = first(National.TV.GRPs.decay2)) * (1-tv.decay2) + df.lagged$National.TV.GRPs.lag2 * tv.decay2) %>%
-  # display
-  mutate(df.lagged, National.TV.GRPs.decay1= lag(df.decayed$National.TV.GRPs.decay1, 
-                    1, default = first(National.TV.GRPs.decay1)) * (1-tv.decay1) + df.lagged$National.TV.GRPs.lag1 * tv.decay1) %>%
-  mutate(df.lagged, National.TV.GRPs.decay2= lag(df.decayed$National.TV.GRPs.decay2, 
-                    1, default = first(National.TV.GRPs.decay2)) * (1-tv.decay2) + df.lagged$National.TV.GRPs.lag2 * tv.decay2) %>%
-  # facebook
-  mutate(df.lagged, National.TV.GRPs.decay1= lag(df.decayed$National.TV.GRPs.decay1, 
-                    1, default = first(National.TV.GRPs.decay1)) * (1-tv.decay1) + df.lagged$National.TV.GRPs.lag1 * tv.decay1) %>%
-  mutate(df.lagged, National.TV.GRPs.decay2= lag(df.decayed$National.TV.GRPs.decay2, 
-                    1, default = first(National.TV.GRPs.decay2)) * (1-tv.decay2) + df.lagged$National.TV.GRPs.lag2 * tv.decay2) %>%
-  # wechat
-  mutate(df.lagged, National.TV.GRPs.decay1= lag(df.decayed$National.TV.GRPs.decay1, 
                     1, default = first(National.TV.GRPs.decay1)) * (1-tv.decay1) + df.lagged$National.TV.GRPs.lag1 * tv.decay1) %>%
   mutate(df.lagged, National.TV.GRPs.decay2= lag(df.decayed$National.TV.GRPs.decay2, 
                     1, default = first(National.TV.GRPs.decay2)) * (1-tv.decay2) + df.lagged$National.TV.GRPs.lag2 * tv.decay2) %>%
