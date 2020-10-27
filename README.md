@@ -56,7 +56,7 @@ MySQL to aggregate all files together [(code)](MySQL/data_preprocess.sql).
 
 ## Pre-Modelling EDA & Data Transformation
 * EDA visualization in R [(selected code)](R/selected_eda.R). 
-* Adding Lag, Decay to 6 selected marketing channels, apply Power curve [(R)]() [(Python)]().
+* Adding Lag, Decay to 6 selected marketing channels, apply Power curve [(R)](R/mmm_premodel_transformation.R) [(Python)]().
 * Advertising intensity, competitive interference and wear-out impacts on advertising effectiveness, but for simiplicity we only look at:
     - Lag
     - Decay
