@@ -238,3 +238,8 @@ head(lead(df$Period,1))
 # decay
 
 # power
+
+
+
+
+
