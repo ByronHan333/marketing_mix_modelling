@@ -312,6 +312,16 @@ model.final <- model2.2.1.1.1.1.2
 
 
 
+# AVM: Actual vs Model
+
+# Model contribution, media vs organic
+
+# ROI: incremental sales, spend, effectiveness/effciency
+
+# Side Diagonistic
+
+
+
 
 
 
