@@ -1,9 +1,9 @@
 setwd("/Users/ziyuanhan/Desktop/mmm_data/week5")
 getwd()
 
-install.packages('dplyr')
-install.packages('magrittr')
-install.packages('data.table')
+# install.packages('dplyr')
+# install.packages('magrittr')
+# install.packages('data.table')
 library('dplyr')
 library('magrittr')
 library('data.table')
@@ -15,9 +15,6 @@ df <- read.table("MMM_AF_S11.csv",
 
 df$Period <- as.Date(df$Period, format = '%m/%d/%Y')
 df$Month <- as.Date(df$Month, format = '%m/%d/%Y')
-
-var <- c('National.TV.GRPs', 'Magazine.GRPs', 'Paid.Search', 'Display', 'Facebook.Impressions', 'Wechat')
-df.selected.columns <- df[var]
 
 
 # next time create data frame to store these value
@@ -41,7 +38,7 @@ wechat.lag2 <- 1
 tv.decay1 <- .8
 tv.decay2 <- .8
 magazine.decay1 <- .7 
-magazine.decay2 <-.7
+magazine.decay2 <-.9
 paid.search.decay1 <- .9
 paid.search.decay2 <- .9
 display.decay1 <- .8
@@ -69,6 +66,7 @@ wechat.pow2 <- 1
 transformation <- function(dataframe, transformation.type, transformation.type.index, transformation.constant, column.name) {
   ## ============== function explanation ==============
   ## This function performs lag, power and decay transformation
+  ## returns the column of final result
   ## ============== function parameter explanation ==============
   ## dataframe: input dataframe
   ## transformation.type: lag, decay or power
@@ -103,9 +101,21 @@ transformation <- function(dataframe, transformation.type, transformation.type.i
   }
 }
 
+# test cases
+# var <- c('National.TV.GRPs', 'Magazine.GRPs', 'Paid.Search', 'Display', 'Facebook.Impressions', 'Wechat')
+# df.selected.columns <- df[var]
+
+## test pass 
+# df.selected.columns
+# df.selected.columns <- transformation(df.selected.columns, 'lag', 1, 1, 'National.TV.GRPs')
+# df.selected.columns <- transformation(df.selected.columns, 'power', 1, 0.8, 'National.TV.GRPs.lag.1')
+# df.selected.columns <- transformation(df.selected.columns, 'decay', 1, 0.4, 'National.TV.GRPs.lag.1.power.1')
+
+
 transformaton_sequence <- function(dataframe, sequence, sequence.indices, values, column.name) {
   ## ============== function explanation ==============
   ## This function performs a sequence of lag, power and decay transformation using transform
+  ## returns the final transformation result
   ## ============== function parameter explanation ==============
   ## dataframe: input dataframe
   ## sequence: sequence of trasnformation
@@ -124,19 +134,48 @@ transformaton_sequence <- function(dataframe, sequence, sequence.indices, values
   tmp <- transformation(tmp, sequence[3], sequence.indices[3], values[3], second.transformation.column.name)
   third.transformation.column.name <- paste0(c(second.transformation.column.name, sequence[3], sequence.indices[3]), collapse = '.')
   
-  return (select(tmp, first.transformation.column.name, second.transformation.column.name, third.transformation.column.name))
+  return (select(tmp, third.transformation.column.name))
 }
 
 
-
 # test pass
-transformaton_sequence(df.selected.columns, c('lag','power','decay'), c(1,1,1), c(1,.8,.4), 'National.TV.GRPs')
+# transformaton_sequence(df.selected.columns, c('lag','power','decay'), c(1,1,1), c(1,.8,.4), 'National.TV.GRPs')
+# transformaton_sequence(df.selected.columns, c('lag','power','decay'), c(1,1,1), c(2,.2,.8), 'Magazine.GRPs')
+# transformaton_sequence(df.selected.columns, c('lag','power','decay'), c(1,1,1), c(0,.6,.6), 'Paid.Search')
 
-## test pass 
-df.selected.columns
-df.selected.columns <- transformation(df.selected.columns, 'lag', 1, 1, 'National.TV.GRPs')
-df.selected.columns <- transformation(df.selected.columns, 'power', 1, 0.8, 'National.TV.GRPs.lag.1')
-df.selected.columns <- transformation(df.selected.columns, 'decay', 1, 0.4, 'National.TV.GRPs.lag.1.power.1')
+
+
+df <- cbind(df, 
+      transformaton_sequence(df.selected.columns, c('lag','power','decay'), c(1,1,1), c(tv.lag1, tv.pow1, tv.decay1), 'National.TV.GRPs'),
+      transformaton_sequence(df.selected.columns, c('lag','power','decay'), c(2,2,2), c(tv.lag2, tv.pow2, tv.decay2), 'National.TV.GRPs'),
+      transformaton_sequence(df.selected.columns, c('lag','power','decay'), c(1,1,1), c(magazine.lag1, magazine.pow1, magazine.decay1), 'Magazine.GRPs'),
+      transformaton_sequence(df.selected.columns, c('lag','power','decay'), c(2,2,2), c(magazine.lag2, magazine.pow2, magazine.decay2), 'Magazine.GRPs'),
+      transformaton_sequence(df.selected.columns, c('lag','power','decay'), c(1,1,1), c(paid.search.lag1, paid.search.pow1, paid.search.decay1), 'Paid.Search'),
+      transformaton_sequence(df.selected.columns, c('lag','power','decay'), c(2,2,2), c(paid.search.lag2, paid.search.pow2, paid.search.decay2), 'Paid.Search'),
+      transformaton_sequence(df.selected.columns, c('lag','power','decay'), c(1,1,1), c(display.lag1, display.pow1, display.decay1), 'Display'),
+      transformaton_sequence(df.selected.columns, c('lag','power','decay'), c(2,2,2), c(display.lag2, display.pow2, display.decay2), 'Display'),
+      transformaton_sequence(df.selected.columns, c('lag','power','decay'), c(1,1,1), c(facebook.lag1, facebook.pow1, facebook.decay1), 'Facebook.Impressions'),
+      transformaton_sequence(df.selected.columns, c('lag','power','decay'), c(2,2,2), c(facebook.lag2, facebook.pow2, facebook.decay2), 'Facebook.Impressions'),
+      transformaton_sequence(df.selected.columns, c('lag','power','decay'), c(1,1,1), c(wechat.lag1, wechat.pow1, wechat.decay1), 'Wechat'),
+      transformaton_sequence(df.selected.columns, c('lag','power','decay'), c(2,2,2), c(wechat.lag2, wechat.pow2, wechat.decay2), 'Wechat')
+)
+
+excluded.cols <- c('National.TV.GRPs', 'Magazine.GRPs', 'Paid.Search', 'Display', 'Facebook.Impressions', 'Wechat')
+df <- select(df, -excluded.cols)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
