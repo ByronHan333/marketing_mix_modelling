@@ -1,15 +1,16 @@
-setwd("/Users/ziyuanhan/Desktop/mmm_data/week5")
+setwd("/Users/ziyuanhan/Desktop/mmm_data")
 getwd()
 
 # install.packages('dplyr')
 # install.packages('magrittr')
 # install.packages('data.table')
+# install.packages('car')
 library('dplyr')
 library('magrittr')
 library('data.table')
 
 # ============================================= read data =============================================
-df <- read.table("MMM_AF_S11.csv", 
+df <- read.table("MMM_AF.csv", 
                  header = TRUE,
                  sep = ",")
 
@@ -163,6 +164,151 @@ df <- cbind(df,
 excluded.cols <- c('National.TV.GRPs', 'Magazine.GRPs', 'Paid.Search', 'Display', 'Facebook.Impressions', 'Wechat')
 df <- select(df, -excluded.cols)
 
+# all variable names
+# t(t(colnames(df)))
+# [1] "Period"                                     "Month"                                     
+# [3] "CCI"                                        "Sales.Event"                               
+# [5] "Black.Friday"                               "July.4th"                                  
+# [7] "Comp.Media.Spend"                           "Sales"                                     
+# [9] "DisplayAlwaysOnImpression"                  "DisplayBrandingImpression"                 
+# [11] "DisplayWebsiteImpression"                   "DisplayHolidayImpression"                  
+# [13] "SearchBrandingclicks"                       "SearchAlwasyOnclicks"                      
+# [15] "SearchWebsiteclicks"                        "FacebookBrandingImpressions"               
+# [17] "FacebookHolidayImpressions"                 "FacebookOtherImpressions"                  
+# [19] "National.TV.GRPs.lag.1.power.1.decay.1"     "National.TV.GRPs.lag.2.power.2.decay.2"    
+# [21] "Magazine.GRPs.lag.1.power.1.decay.1"        "Magazine.GRPs.lag.2.power.2.decay.2"       
+# [23] "Paid.Search.lag.1.power.1.decay.1"          "Paid.Search.lag.2.power.2.decay.2"         
+# [25] "Display.lag.1.power.1.decay.1"              "Display.lag.2.power.2.decay.2"             
+# [27] "Facebook.Impressions.lag.1.power.1.decay.1" "Facebook.Impressions.lag.2.power.2.decay.2"
+# [29] "Wechat.lag.1.power.1.decay.1"               "Wechat.lag.2.power.2.decay.2"
+
+# baseline model 
+# explains 94% of variance
+# all p-value significant than .001
+# all vif just above 1, not significant multicollinearity
+model1 = lm(data = df, Sales~CCI+Sales.Event+July.4th+Black.Friday+Comp.Media.Spend)
+summary(model1)
+
+# add TV -- add media channel, starting from with highest budget
+# I choose model 1 because p-value is more significant
+model2.1 = lm(data = df, Sales~CCI+Sales.Event+July.4th+Black.Friday+Comp.Media.Spend+
+              National.TV.GRPs.lag.1.power.1.decay.1)
+summary(model2.1)
+
+# model.residual = resid(model2.1)
+# plot(df$Period, model.residual, ylab="Residuals", xlab="Period", main="Residual over time") 
+# abline(0, 0) 
+
+model2.2 = lm(data = df, Sales~CCI+Sales.Event+July.4th+Black.Friday+Comp.Media.Spend+
+              National.TV.GRPs.lag.2.power.2.decay.2)
+summary(model2.2)
+
+# model.residual = resid(model2.2)
+# plot(df$Period, model.residual, ylab="Residuals", xlab="Period", main="Residual over time") 
+# abline(0, 0) 
+
+# add Paid Search
+# I choose model 2 because P-value is more significant
+model2.2.1 = lm(data = df, Sales~CCI+Sales.Event+July.4th+Black.Friday+Comp.Media.Spend+
+                  National.TV.GRPs.lag.2.power.2.decay.2+Paid.Search.lag.1.power.1.decay.1)
+summary(model2.2.1)
+
+model2.2.2 = lm(data = df, Sales~CCI+Sales.Event+July.4th+Black.Friday+Comp.Media.Spend+
+                  National.TV.GRPs.lag.2.power.2.decay.2+Paid.Search.lag.2.power.2.decay.2)
+summary(model2.2.2)
+
+# add wechat
+# if model CCI coefficient is negative, discard
+# both model performs similarly
+# I choose model 1
+# residual seems more random in model 1, R2 is larger for model 1
+# AIC is smaller for model 1
+model2.2.1.1 = lm(data = df, Sales~CCI+Sales.Event+July.4th+Black.Friday+Comp.Media.Spend+
+                  National.TV.GRPs.lag.2.power.2.decay.2+Paid.Search.lag.1.power.1.decay.1+
+                    Wechat.lag.1.power.1.decay.1)
+summary(model2.2.1.1)
+car::vif(model2.2.1.1)
+
+AIC(model2.2.1.1)
+model.residual = resid(model2.2.1.1)
+plot(df$Period, model.residual, ylab="Residuals", xlab="Period", main="Residual over time",ylim = c(-25000,40000)) 
+abline(0, 0) 
+plot(df$Sales, model.residual, ylab="Residuals", xlab="Period", main="Residual over time",ylim = c(-25000,40000)) 
+abline(0, 0) 
+
+
+model2.2.1.2 = lm(data = df, Sales~CCI+Sales.Event+July.4th+Black.Friday+Comp.Media.Spend+
+                    National.TV.GRPs.lag.2.power.2.decay.2+Paid.Search.lag.1.power.1.decay.1+
+                    Wechat.lag.2.power.2.decay.2)
+summary(model2.2.1.2)
+car::vif(model2.2.1.2)
+
+AIC(model2.2.1.2)
+model.residual = resid(model2.2.1.2)
+plot(df$Period, model.residual, ylab="Residuals", xlab="Period", main="Residual over time", ylim = c(-25000,40000)) 
+abline(0, 0) 
+plot(df$Sales, model.residual, ylab="Residuals", xlab="Period", main="Residual over time",ylim = c(-25000,40000)) 
+abline(0, 0) 
+
+# add magazine
+# I chose model1 because p-value is more significant and didn't move other variables drastically
+model2.2.1.1.1 = lm(data = df, Sales~CCI+Sales.Event+July.4th+Black.Friday+Comp.Media.Spend+
+                    National.TV.GRPs.lag.2.power.2.decay.2+Paid.Search.lag.1.power.1.decay.1+
+                    Wechat.lag.1.power.1.decay.1+Magazine.GRPs.lag.1.power.1.decay.1)
+summary(model2.2.1.1.1)
+
+model2.2.1.1.2 = lm(data = df, Sales~CCI+Sales.Event+July.4th+Black.Friday+Comp.Media.Spend+
+                    National.TV.GRPs.lag.2.power.2.decay.2+Paid.Search.lag.1.power.1.decay.1+
+                    Wechat.lag.1.power.1.decay.1+Magazine.GRPs.lag.2.power.2.decay.2)
+summary(model2.2.1.1.2)
+
+# add display
+# I chose model1 because p-value is more significant
+model2.2.1.1.1.1 = lm(data = df, Sales~CCI+Sales.Event+July.4th+Black.Friday+Comp.Media.Spend+
+                      National.TV.GRPs.lag.2.power.2.decay.2+Paid.Search.lag.1.power.1.decay.1+
+                      Wechat.lag.1.power.1.decay.1+Magazine.GRPs.lag.1.power.1.decay.1+
+                        Display.lag.1.power.1.decay.1)
+summary(model2.2.1.1.1.1)
+
+model2.2.1.1.1.2 = lm(data = df, Sales~CCI+Sales.Event+July.4th+Black.Friday+Comp.Media.Spend+
+                        National.TV.GRPs.lag.2.power.2.decay.2+Paid.Search.lag.1.power.1.decay.1+
+                        Wechat.lag.1.power.1.decay.1+Magazine.GRPs.lag.1.power.1.decay.1+
+                        Display.lag.2.power.2.decay.2)
+summary(model2.2.1.1.1.2)
+
+# add facebook
+# I chose model2 since R^2 is higher and p-value is smaller
+model2.2.1.1.1.1.1 = lm(data = df, Sales~CCI+Sales.Event+July.4th+Black.Friday+Comp.Media.Spend+
+                        National.TV.GRPs.lag.2.power.2.decay.2+Paid.Search.lag.1.power.1.decay.1+
+                        Wechat.lag.1.power.1.decay.1+Magazine.GRPs.lag.1.power.1.decay.1+
+                        Display.lag.1.power.1.decay.1+Facebook.Impressions.lag.1.power.1.decay.1)
+summary(model2.2.1.1.1.1.1)
+car::qqPlot(model2.2.1.1.1.1.1)
+
+car::vif(model2.2.1.1.1.1.1)
+AIC(model2.2.1.1.1.1.1)
+model.residual = resid(model2.2.1.1.1.1.1)
+plot(df$Period, model.residual, ylab="Residuals", xlab="Period", main="Residual over time", ylim = c(-20000,30000)) 
+abline(0, 0) 
+plot(df$Sales, model.residual, ylab="Residuals", xlab="Period", main="Residual over time",ylim = c(-20000,30000)) 
+abline(0, 0) 
+
+model2.2.1.1.1.1.2 = lm(data = df, Sales~CCI+Sales.Event+July.4th+Black.Friday+Comp.Media.Spend+
+                          National.TV.GRPs.lag.2.power.2.decay.2+Paid.Search.lag.1.power.1.decay.1+
+                          Wechat.lag.1.power.1.decay.1+Magazine.GRPs.lag.1.power.1.decay.1+
+                          Display.lag.1.power.1.decay.1+Facebook.Impressions.lag.2.power.2.decay.2)
+summary(model2.2.1.1.1.1.2)
+
+car::vif(model2.2.1.1.1.1.2)
+AIC(model2.2.1.1.1.1.2)
+model.residual = resid(model2.2.1.1.1.1.2)
+plot(df$Period, model.residual, ylab="Residuals", xlab="Period", main="Residual over time", ylim = c(-10000,10000)) 
+abline(0, 0) 
+plot(df$Sales, model.residual, ylab="Residuals", xlab="Period", main="Residual over time",ylim = c(-20000,30000)) 
+abline(0, 0) 
+car::qqPlot(model2.2.1.1.1.1.2)
+
+model.final <- model2.2.1.1.1.1.2
 
 
 
@@ -178,105 +324,6 @@ df <- select(df, -excluded.cols)
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# ========= draft not need =============
-
-tv.lag=1
-tv.power=0.8
-tv.decay=0.4
-
-ok.1 <- transformation(df.selected.columns, 'lag', 1, 1, 'National.TV.GRPs')
-ok.2 <- transformation(ok.1, 'power', 1, 0.8, 'National.TV.GRPs.lag.1')
-transformation(ok.2, 'decay', 1, 0.4, 'National.TV.GRPs.lag.1.power.1')[['National.TV.GRPs.lag.1.power.1.decay.1']]
-
-ok.2[['National.TV.GRPs.lag.1.power.1.decay.1']]
-
-ok.2 %>%
-  mutate(y1 = purrr::accumulate(lag(ok.2[['National.TV.GRPs.lag.1.power.1.decay.1']]), 
-                                ~ok.2[['National.TV.GRPs.lag.1.power.1.decay.1']]* 2 + ok.2[['National.TV.GRPs.lag.1.power.1']], .init = 1))
-
-
-
-mutate(y1 = purrr::accumulate(x[-n()], ~.x * 2 +  .y, .init = 1))
-purrr::accumulate(lag(x, default = 1), ~ 2*.x + .y)
-
-purrr::accumulate(1:10, ~.^2, .init=3)
-lag(ok.2[['National.TV.GRPs.lag.1.power.1']])
-
-purrr::accumulate(ok.2[['National.TV.GRPs.lag.1.power.1']], ~.x * 0.6 +  .y*0.4)
-purrr::accumulate(1:8, ~.x +  .y*2, .init = 1)
-
-transformation(df.lagged, 'decay',1,0.2,'National.TV.GRPs',previous.transformation.column='National.TV.GRPs.lag1')
-
-
-
-
-
-
-df.lagged <- df.selected.columns %>%
-  # tv
-  mutate(df.selected.columns, National.TV.GRPs.lag1= lag(df.selected.columns$National.TV.GRPs, tv.lag1)) %>%
-  mutate(df.selected.columns, National.TV.GRPs.lag2= lag(df.selected.columns$National.TV.GRPs, tv.lag2)) %>%
-  # magazine
-  mutate(df.selected.columns, Magazine.GRPs.lag1= lag(df.selected.columns$Magazine.GRPs, magazine.lag1)) %>%
-  mutate(df.selected.columns, Magazine.GRPs.lag2= lag(df.selected.columns$Magazine.GRPs, magazine.lag2)) %>%
-  mutate_if(is.numeric, ~replace(., is.na(.), 0))
-
-head(df.selected.columns)
-head(df.lagged)
-  
-df.decayed <- copy(df.lagged)
-df.decayed$National.TV.GRPs.decay1 <- copy(df.decayed$National.TV.GRPs.lag1)
-df.decayed$Magazine.GRPs.decay1 <- copy(df.decayed$Magazine.GRPs.lag1)
-
-tv.decay1 = 0.2
-df.decayed <- df.decayed %>%
-  # tv
-  mutate(df.lagged, National.TV.GRPs.decay1= lag(df.decayed$National.TV.GRPs.decay1, 
-                    1, default = first(National.TV.GRPs.decay1)) * (1-tv.decay1) + df.lagged$National.TV.GRPs.lag1 * tv.decay1)
-  
-  
-  mutate(df.lagged, National.TV.GRPs.decay2= lag(df.decayed$National.TV.GRPs.decay2, 
-                    1, default = first(National.TV.GRPs.decay2)) * (1-tv.decay2) + df.lagged$National.TV.GRPs.lag2 * tv.decay2) %>%
-  # magazine
-  mutate(df.lagged, Magazine.GRPs.decay1= lag(df.decayed$Magazine.GRPs.decay1, 
-                    1, default = first(National.TV.GRPs.decay1)) * (1-tv.decay1) + df.lagged$National.TV.GRPs.lag1 * tv.decay1) %>%
-  mutate(df.lagged, National.TV.GRPs.decay2= lag(df.decayed$National.TV.GRPs.decay2, 
-                    1, default = first(National.TV.GRPs.decay2)) * (1-tv.decay2) + df.lagged$National.TV.GRPs.lag2 * tv.decay2) %>%
-  
-  
-  # mutate_if(is.numeric, ~replace(., is.na(.), 0))
-  
-head(df.decayed)
-  
-
-
-
-# lag
-# mutate(df2, llpm102= lag(pm10))
-
-head(df$Period)
-head(lag(df$Period,1))
-head(lead(df$Period,1))
-
-# decay
-
-# power
 
 
 
