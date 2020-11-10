@@ -5,9 +5,12 @@ getwd()
 # install.packages('magrittr')
 # install.packages('data.table')
 # install.packages('car')
+# install.packages('reshape')
+# install.packages("readxl")
 library('dplyr')
 library('magrittr')
 library('data.table')
+library('readxl')
 
 # ============================================= read data =============================================
 df <- read.table("MMM_AF.csv", 
@@ -147,18 +150,18 @@ transformaton_sequence <- function(dataframe, sequence, sequence.indices, values
 
 
 df <- cbind(df, 
-      transformaton_sequence(df.selected.columns, c('lag','power','decay'), c(1,1,1), c(tv.lag1, tv.pow1, tv.decay1), 'National.TV.GRPs'),
-      transformaton_sequence(df.selected.columns, c('lag','power','decay'), c(2,2,2), c(tv.lag2, tv.pow2, tv.decay2), 'National.TV.GRPs'),
-      transformaton_sequence(df.selected.columns, c('lag','power','decay'), c(1,1,1), c(magazine.lag1, magazine.pow1, magazine.decay1), 'Magazine.GRPs'),
-      transformaton_sequence(df.selected.columns, c('lag','power','decay'), c(2,2,2), c(magazine.lag2, magazine.pow2, magazine.decay2), 'Magazine.GRPs'),
-      transformaton_sequence(df.selected.columns, c('lag','power','decay'), c(1,1,1), c(paid.search.lag1, paid.search.pow1, paid.search.decay1), 'Paid.Search'),
-      transformaton_sequence(df.selected.columns, c('lag','power','decay'), c(2,2,2), c(paid.search.lag2, paid.search.pow2, paid.search.decay2), 'Paid.Search'),
-      transformaton_sequence(df.selected.columns, c('lag','power','decay'), c(1,1,1), c(display.lag1, display.pow1, display.decay1), 'Display'),
-      transformaton_sequence(df.selected.columns, c('lag','power','decay'), c(2,2,2), c(display.lag2, display.pow2, display.decay2), 'Display'),
-      transformaton_sequence(df.selected.columns, c('lag','power','decay'), c(1,1,1), c(facebook.lag1, facebook.pow1, facebook.decay1), 'Facebook.Impressions'),
-      transformaton_sequence(df.selected.columns, c('lag','power','decay'), c(2,2,2), c(facebook.lag2, facebook.pow2, facebook.decay2), 'Facebook.Impressions'),
-      transformaton_sequence(df.selected.columns, c('lag','power','decay'), c(1,1,1), c(wechat.lag1, wechat.pow1, wechat.decay1), 'Wechat'),
-      transformaton_sequence(df.selected.columns, c('lag','power','decay'), c(2,2,2), c(wechat.lag2, wechat.pow2, wechat.decay2), 'Wechat')
+      transformaton_sequence(df, c('lag','power','decay'), c(1,1,1), c(tv.lag1, tv.pow1, tv.decay1), 'National.TV.GRPs'),
+      transformaton_sequence(df, c('lag','power','decay'), c(2,2,2), c(tv.lag2, tv.pow2, tv.decay2), 'National.TV.GRPs'),
+      transformaton_sequence(df, c('lag','power','decay'), c(1,1,1), c(magazine.lag1, magazine.pow1, magazine.decay1), 'Magazine.GRPs'),
+      transformaton_sequence(df, c('lag','power','decay'), c(2,2,2), c(magazine.lag2, magazine.pow2, magazine.decay2), 'Magazine.GRPs'),
+      transformaton_sequence(df, c('lag','power','decay'), c(1,1,1), c(paid.search.lag1, paid.search.pow1, paid.search.decay1), 'Paid.Search'),
+      transformaton_sequence(df, c('lag','power','decay'), c(2,2,2), c(paid.search.lag2, paid.search.pow2, paid.search.decay2), 'Paid.Search'),
+      transformaton_sequence(df, c('lag','power','decay'), c(1,1,1), c(display.lag1, display.pow1, display.decay1), 'Display'),
+      transformaton_sequence(df, c('lag','power','decay'), c(2,2,2), c(display.lag2, display.pow2, display.decay2), 'Display'),
+      transformaton_sequence(df, c('lag','power','decay'), c(1,1,1), c(facebook.lag1, facebook.pow1, facebook.decay1), 'Facebook.Impressions'),
+      transformaton_sequence(df, c('lag','power','decay'), c(2,2,2), c(facebook.lag2, facebook.pow2, facebook.decay2), 'Facebook.Impressions'),
+      transformaton_sequence(df, c('lag','power','decay'), c(1,1,1), c(wechat.lag1, wechat.pow1, wechat.decay1), 'Wechat'),
+      transformaton_sequence(df, c('lag','power','decay'), c(2,2,2), c(wechat.lag2, wechat.pow2, wechat.decay2), 'Wechat')
 )
 
 excluded.cols <- c('National.TV.GRPs', 'Magazine.GRPs', 'Paid.Search', 'Display', 'Facebook.Impressions', 'Wechat')
@@ -296,7 +299,7 @@ abline(0, 0)
 model2.2.1.1.1.1.2 = lm(data = df, Sales~CCI+Sales.Event+July.4th+Black.Friday+Comp.Media.Spend+
                           National.TV.GRPs.lag.2.power.2.decay.2+Paid.Search.lag.1.power.1.decay.1+
                           Wechat.lag.1.power.1.decay.1+Magazine.GRPs.lag.1.power.1.decay.1+
-                          Display.lag.1.power.1.decay.1+Facebook.Impressions.lag.2.power.2.decay.2)
+                          Display.lag.1.power.1.decay.1+Facebook.Impressions.lag.2.power.2.decay.2, x=T)
 summary(model2.2.1.1.1.1.2)
 
 car::vif(model2.2.1.1.1.1.2)
@@ -308,21 +311,94 @@ plot(df$Sales, model.residual, ylab="Residuals", xlab="Period", main="Residual o
 abline(0, 0) 
 car::qqPlot(model2.2.1.1.1.1.2)
 
-model.final <- model2.2.1.1.1.1.2
+transformation.parameters <- matrix(ncol=3, nrow=6)
+transformation.parameters[1,1:3] <- c(tv.lag2, tv.pow2, tv.decay2)
+transformation.parameters[2,1:3] <- c(paid.search.lag1, paid.search.pow1, paid.search.decay1)
+transformation.parameters[3,1:3] <- c(wechat.lag1, wechat.pow1, wechat.decay1)
+transformation.parameters[4,1:3] <- c(magazine.lag1, magazine.pow1, magazine.decay1)
+transformation.parameters[5,1:3] <- c(display.lag1, display.pow1, display.decay1)
+transformation.parameters[6,1:3] <- c(facebook.lag2, facebook.pow2, facebook.decay2)
+transformation.parameters <- as.data.frame(transformation.parameters)
+transformation.parameters <- cbind(c('tv','paid.search','wechat','magazine','display','facebook'),as.data.frame(transformation.parameters))
+colnames(transformation.parameters) <- c('channel','lag','pow','decay')
+transformation.parameters
 
+model.final <- model2.2.1.1.1.1.2
+model.final$transformation.parameters <- transformation.parameters
 
 
 # AVM: Actual vs Model
+avm <- cbind.data.frame(df$Period, df$Sales, model.final$fitted.values)
+colnames(avm) = c('Period','sales','predicted_value')
+# write.csv(contri, file='./tableau_data/avm.csv', row.names=F)
 
 # Model contribution, media vs organic
+select(model.final$model, -c('Sales'))
+model.final$coefficients
 
-# ROI: incremental sales, spend, effectiveness/effciency
+contribution <- sweep(model.final$x, 2, model.final$coefficients, '*')
+contribution <- data.frame(contribution)
+contribution$Period <- df$Period
 
-# Side Diagonistic
+contri <- reshape::melt(contribution, id.vars = ('Period'))
+contri
+write.csv(contri, file='./tableau_data/contribution.csv', row.names=F)
+
+# MAPE
+mean(abs(avm$sales-avm$predicted_value)/avm$sales)
+
+# ROI: Compare incremental sales, spend, media effectiveness/media efficiency
+# This part is completed in Tableau
 
 
+# Budget optimization
+# final model parameters
+print(model.final$transformation.parameters)
+print(model.final$coefficients)
+
+activity <- as.data.frame(read_excel("Optimizer.xlsx", sheet = "2018 activity"))
+spend <- as.data.frame(read_excel("Optimizer.xlsx", sheet = "2018 spend"))
+
+p <- model.final$transformation.parameters
+p
+activity <- cbind(activity, 
+                  transformaton_sequence(activity, c('lag','power','decay'), c(1,1,1), 
+                                         c(p[which(p$channel == 'tv'), ]$lag,
+                                           p[which(p$channel == 'tv'), ]$pow,
+                                           p[which(p$channel == 'tv'), ]$decay), 'National TV'),
+                  transformaton_sequence(activity, c('lag','power','decay'), c(1,1,1), 
+                                         c(p[which(p$channel == 'magazine'), ]$lag,
+                                           p[which(p$channel == 'magazine'), ]$pow,
+                                           p[which(p$channel == 'magazine'), ]$decay), 'Magazine'),
+                  transformaton_sequence(activity, c('lag','power','decay'), c(1,1,1), 
+                                         c(p[which(p$channel == 'paid.search'), ]$lag,
+                                           p[which(p$channel == 'paid.search'), ]$pow,
+                                           p[which(p$channel == 'paid.search'), ]$decay), 'Paid Search'),
+                  transformaton_sequence(activity, c('lag','power','decay'), c(1,1,1), 
+                                         c(p[which(p$channel == 'display'), ]$lag,
+                                           p[which(p$channel == 'display'), ]$pow,
+                                           p[which(p$channel == 'display'), ]$decay), 'Display'),
+                  transformaton_sequence(activity, c('lag','power','decay'), c(1,1,1), 
+                                         c(p[which(p$channel == 'facebook'), ]$lag,
+                                           p[which(p$channel == 'facebook'), ]$pow,
+                                           p[which(p$channel == 'facebook'), ]$decay), 'Facebook'),
+                  transformaton_sequence(activity, c('lag','power','decay'), c(1,1,1), 
+                                         c(p[which(p$channel == 'wechat'), ]$lag,
+                                           p[which(p$channel == 'wechat'), ]$pow,
+                                           p[which(p$channel == 'wechat'), ]$decay), 'Wechat')
+)
+
+excluded.cols <- c('National TV', 'Magazine', 'Paid Search', 'Display', 'Facebook', 'Wechat')
+activity <- select(activity, -excluded.cols)
 
 
+# Side Diagnostic
+# display by campaign
+# search by types
+# facebook by campaign
+
+
+??sweep
 
 
 
