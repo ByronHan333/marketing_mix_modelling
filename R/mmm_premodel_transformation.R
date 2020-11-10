@@ -389,9 +389,29 @@ activity <- cbind(activity,
 )
 
 excluded.cols <- c('National TV', 'Magazine', 'Paid Search', 'Display', 'Facebook', 'Wechat')
-activity <- select(activity, -excluded.cols)
+activity.planned <- select(activity, -excluded.cols)
+col_order <- c('Intercept','CCI','Sales.Event','July.4th','Black.Friday','Comp Media Spend',
+               'National TV.lag.1.power.1.decay.1','Paid Search.lag.1.power.1.decay.1','Wechat.lag.1.power.1.decay.1',
+               'Magazine.lag.1.power.1.decay.1','Display.lag.1.power.1.decay.1','Facebook.lag.1.power.1.decay.1')
+model.input <- activity.planned[, col_order]
+
+# https://stackoverflow.com/questions/18396633/sum-all-values-in-every-column-of-a-data-frame-in-r
+spend.planned <- colSums(spend[,-1], na.rm = FALSE, dims = 1)
+spend.planned
+
+total.budget <- sum(spend[,-1])
+total.budget
+
+planned.contribution <- sweep(model.input, 2, model.final$coefficients, '*')
+
+colSums(planned.contribution)
+
+colSums(model.input) * model.final$coefficients
 
 
+dim(select(activity.planned, -c('Date')))
+length(model.final$coefficients)
+model.final$coefficients
 # Side Diagnostic
 # display by campaign
 # search by types
