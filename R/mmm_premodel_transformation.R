@@ -7,6 +7,8 @@ getwd()
 # install.packages('car')
 # install.packages('reshape')
 # install.packages("readxl")
+# install.packages('lpSolve')
+library('lpSolve')
 library('dplyr')
 library('magrittr')
 library('data.table')
@@ -330,7 +332,7 @@ model.final$transformation.parameters <- transformation.parameters
 # AVM: Actual vs Model
 avm <- cbind.data.frame(df$Period, df$Sales, model.final$fitted.values)
 colnames(avm) = c('Period','sales','predicted_value')
-# write.csv(contri, file='./tableau_data/avm.csv', row.names=F)
+write.csv(avm, file='./tableau_data/avm.csv', row.names=F)
 
 # Model contribution, media vs organic
 select(model.final$model, -c('Sales'))
@@ -389,33 +391,127 @@ activity <- cbind(activity,
 )
 
 excluded.cols <- c('National TV', 'Magazine', 'Paid Search', 'Display', 'Facebook', 'Wechat')
-activity.planned <- select(activity, -excluded.cols)
+planned.activity <- select(activity, -excluded.cols)
 col_order <- c('Intercept','CCI','Sales.Event','July.4th','Black.Friday','Comp Media Spend',
                'National TV.lag.1.power.1.decay.1','Paid Search.lag.1.power.1.decay.1','Wechat.lag.1.power.1.decay.1',
                'Magazine.lag.1.power.1.decay.1','Display.lag.1.power.1.decay.1','Facebook.lag.1.power.1.decay.1')
-model.input <- activity.planned[, col_order]
+model.input <- planned.activity[, col_order]
+
+media.channels <- c('National TV.lag.1.power.1.decay.1','Paid Search.lag.1.power.1.decay.1','Wechat.lag.1.power.1.decay.1',
+                    'Magazine.lag.1.power.1.decay.1','Display.lag.1.power.1.decay.1','Facebook.lag.1.power.1.decay.1')
+
+colsum.planned.media.activity <- colSums(planned.activity[,c(media.channels)])
+colsum.planned.media.activity
 
 # https://stackoverflow.com/questions/18396633/sum-all-values-in-every-column-of-a-data-frame-in-r
-spend.planned <- colSums(spend[,-1], na.rm = FALSE, dims = 1)
-spend.planned
+colsum.planned.spend <- colSums(spend[,-1], na.rm = FALSE, dims = 1)
+colsum.planned.spend
 
 total.budget <- sum(spend[,-1])
 total.budget
 
 planned.contribution <- sweep(model.input, 2, model.final$coefficients, '*')
+planned.contribution
 
 colSums(planned.contribution)
 
 colSums(model.input) * model.final$coefficients
 
-
 dim(select(activity.planned, -c('Date')))
 length(model.final$coefficients)
 model.final$coefficients
+
+current.predicted.sales <- sum(planned.contribution)
+current.predicted.sales
+
+colsum.planned.spend
+colsum.planned.media.activity
+model.final$coefficients
+
+typeof(colsum.planned.spend)
+names(colsum.planned.media.activity) <- c('National TV','Paid Search','Wechat','Magazine','Display','Facebook')
+colsum.planned.media.activity
+
+objective.function <- c(
+  model.final$coefficients['National.TV.GRPs.lag.2.power.2.decay.2']*colsum.planned.media.activity['National TV']/colsum.planned.spend['National TV'],
+  model.final$coefficients['Paid.Search.lag.1.power.1.decay.1']*colsum.planned.media.activity['Paid Search']/colsum.planned.spend['Paid Search'],
+  model.final$coefficients['Wechat.lag.1.power.1.decay.1']*colsum.planned.media.activity['Wechat']/colsum.planned.spend['Wechat'],
+  model.final$coefficients['Magazine.GRPs.lag.1.power.1.decay.1']*colsum.planned.media.activity['Magazine']/colsum.planned.spend['Magazine'],
+  model.final$coefficients['Display.lag.1.power.1.decay.1']*colsum.planned.media.activity['Display']/colsum.planned.spend['Display'],
+  model.final$coefficients['Facebook.Impressions.lag.2.power.2.decay.2']*colsum.planned.media.activity['Facebook']/colsum.planned.spend['Facebook']
+)
+
+constraints <- matrix(c(1,1,1,1,1,1,
+                        1,0,0,0,0,0,
+                        0,1,0,0,0,0,
+                        0,0,1,0,0,0,
+                        0,0,0,1,0,0,
+                        0,0,0,0,1,0,
+                        0,0,0,0,0,1,
+                        1,0,0,0,0,0,
+                        0,1,0,0,0,0,
+                        0,0,1,0,0,0,
+                        0,0,0,1,0,0,
+                        0,0,0,0,1,0,
+                        0,0,0,0,0,1), nrow=13, byrow=T)
+
+
+constraints.directions <- c('<=',
+                            '<=',
+                            '<=',
+                            '<=',
+                            '<=',
+                            '<=',
+                            '<=',
+                            '>=',
+                            '>=',
+                            '>=',
+                            '>=',
+                            '>=',
+                            '>=')
+
+constraints.rhs <- c(sum(colsum.planned.spend),
+                     1.3*colsum.planned.spend['National TV'],
+                     1.3*colsum.planned.spend['Paid Search'],
+                     1.3*colsum.planned.spend['Wechat'],
+                     1.3*colsum.planned.spend['Magazine'],
+                     1.3*colsum.planned.spend['Display'],
+                     1.3*colsum.planned.spend['Facebook'],
+                     0.7*colsum.planned.spend['National TV'],
+                     0.7*colsum.planned.spend['Paid Search'],
+                     0.7*colsum.planned.spend['Wechat'],
+                     0.7*colsum.planned.spend['Magazine'],
+                     0.7*colsum.planned.spend['Display'],
+                     0.7*colsum.planned.spend['Facebook'])
+
+optimum <-  lp(direction="max",
+               objective.in = objective.function,
+               const.mat = constraints,
+               const.dir = constraints.directions,
+               const.rhs = constraints.rhs,
+               all.int = T)
+
+
+optimum$solution/colsum.planned.spend2
+optimum$solution
+colsum.planned.spend
+colsum.planned.spend2
+colsum.planned.spend2 <- colsum.planned.spend[c('National TV','Paid Search','Wechat','Magazine','Display','Facebook')]
+
+c(
+  model.final$coefficients['National.TV.GRPs.lag.2.power.2.decay.2']*colsum.planned.media.activity['National TV']/colsum.planned.spend['National TV'],
+  model.final$coefficients['Paid.Search.lag.1.power.1.decay.1']*colsum.planned.media.activity['Paid Search']/colsum.planned.spend['Paid Search'],
+  model.final$coefficients['Wechat.lag.1.power.1.decay.1']*colsum.planned.media.activity['Wechat']/colsum.planned.spend['Wechat'],
+  model.final$coefficients['Magazine.GRPs.lag.1.power.1.decay.1']*colsum.planned.media.activity['Magazine']/colsum.planned.spend['Magazine'],
+  model.final$coefficients['Display.lag.1.power.1.decay.1']*colsum.planned.media.activity['Display']/colsum.planned.spend['Display'],
+  model.final$coefficients['Facebook.Impressions.lag.2.power.2.decay.2']*colsum.planned.media.activity['Facebook']/colsum.planned.spend['Facebook']
+)
+
 # Side Diagnostic
 # display by campaign
 # search by types
 # facebook by campaign
+# wechat
 
 
 ??sweep
