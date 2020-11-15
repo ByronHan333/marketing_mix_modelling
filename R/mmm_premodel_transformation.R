@@ -309,7 +309,7 @@ AIC(model2.2.1.1.1.1.2)
 model.residual = resid(model2.2.1.1.1.1.2)
 plot(df$Period, model.residual, ylab="Residuals", xlab="Period", main="Residual over time", ylim = c(-10000,10000)) 
 abline(0, 0) 
-plot(df$Sales, model.residual, ylab="Residuals", xlab="Period", main="Residual over time",ylim = c(-20000,30000)) 
+plot(df$Sales, model.residual, ylab="Residuals", xlab="Y value", main="Residual over Y",ylim = c(-20000,30000)) 
 abline(0, 0) 
 car::qqPlot(model2.2.1.1.1.1.2)
 
@@ -421,7 +421,12 @@ dim(select(activity.planned, -c('Date')))
 length(model.final$coefficients)
 model.final$coefficients
 
-current.predicted.sales <- sum(planned.contribution)
+current.predicted.sales <- sum(planned.contribution[,c('National TV.lag.1.power.1.decay.1',
+                                                       'Paid Search.lag.1.power.1.decay.1',
+                                                       'Wechat.lag.1.power.1.decay.1',
+                                                       'Magazine.lag.1.power.1.decay.1',
+                                                       'Display.lag.1.power.1.decay.1',
+                                                       'Facebook.lag.1.power.1.decay.1')])
 current.predicted.sales
 
 colsum.planned.spend
@@ -431,6 +436,8 @@ model.final$coefficients
 typeof(colsum.planned.spend)
 names(colsum.planned.media.activity) <- c('National TV','Paid Search','Wechat','Magazine','Display','Facebook')
 colsum.planned.media.activity
+
+####################################### Linear Programming Solution #######################################
 
 objective.function <- c(
   model.final$coefficients['National.TV.GRPs.lag.2.power.2.decay.2']*colsum.planned.media.activity['National TV']/colsum.planned.spend['National TV'],
@@ -498,6 +505,7 @@ colsum.planned.spend
 colsum.planned.spend2
 colsum.planned.spend2 <- colsum.planned.spend[c('National TV','Paid Search','Wechat','Magazine','Display','Facebook')]
 
+## objective function in lp
 c(
   model.final$coefficients['National.TV.GRPs.lag.2.power.2.decay.2']*colsum.planned.media.activity['National TV']/colsum.planned.spend['National TV'],
   model.final$coefficients['Paid.Search.lag.1.power.1.decay.1']*colsum.planned.media.activity['Paid Search']/colsum.planned.spend['Paid Search'],
@@ -507,6 +515,40 @@ c(
   model.final$coefficients['Facebook.Impressions.lag.2.power.2.decay.2']*colsum.planned.media.activity['Facebook']/colsum.planned.spend['Facebook']
 )
 
+model.final$coefficients
+
+model.final$transformation.parameters
+
+optimum$solution
+sum(colsum.planned.media.activity * optimum$solution)
+
+# optimized sum of contribution in each channel
+c(model.final$coefficients['National.TV.GRPs.lag.2.power.2.decay.2']*colsum.planned.media.activity['National TV']*optimum$solution[1]/colsum.planned.spend['National TV'],
+model.final$coefficients['Paid.Search.lag.1.power.1.decay.1']*colsum.planned.media.activity['Paid Search']*optimum$solution[2]/colsum.planned.spend['Paid Search'],
+model.final$coefficients['Wechat.lag.1.power.1.decay.1']*colsum.planned.media.activity['Wechat']*optimum$solution[3]/colsum.planned.spend['Wechat'],
+model.final$coefficients['Magazine.GRPs.lag.1.power.1.decay.1']*colsum.planned.media.activity['Magazine']*optimum$solution[4]/colsum.planned.spend['Magazine'],
+model.final$coefficients['Display.lag.1.power.1.decay.1']*colsum.planned.media.activity['Display']*optimum$solution[5]/colsum.planned.spend['Display'],
+model.final$coefficients['Facebook.Impressions.lag.2.power.2.decay.2']*colsum.planned.media.activity['Facebook']*optimum$solution[6]/colsum.planned.spend['Facebook'])
+
+optimum$solution
+
+# optimized sum of activities in each channel
+c(colsum.planned.media.activity['National TV']*optimum$solution[1]/colsum.planned.spend['National TV'],
+  colsum.planned.media.activity['Paid Search']*optimum$solution[2]/colsum.planned.spend['Paid Search'],
+  colsum.planned.media.activity['Wechat']*optimum$solution[3]/colsum.planned.spend['Wechat'],
+  colsum.planned.media.activity['Magazine']*optimum$solution[4]/colsum.planned.spend['Magazine'],
+  colsum.planned.media.activity['Display']*optimum$solution[5]/colsum.planned.spend['Display'],
+  colsum.planned.media.activity['Facebook']*optimum$solution[6]/colsum.planned.spend['Facebook'])
+
+# check
+planned.activity[,c(media.channels)]
+
+####################################### End #######################################
+
+####################################### Grid Search Solution #######################################
+
+
+
 # Side Diagnostic
 # display by campaign
 # search by types
@@ -515,7 +557,6 @@ c(
 
 
 ??sweep
-
 
 
 
