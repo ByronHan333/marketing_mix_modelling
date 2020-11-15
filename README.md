@@ -1,5 +1,5 @@
 # Marketing Mix Modelling project
-This is an end-to-end project on marketing mix modelling of a female quick fashion brand's marketing activities and environment activities between 2014 and 2018. <br /> 
+This is an end-to-end project on marketing mix modelling of a female quick fashion brand's marketing activities and environment activities between 2014 and 2017. <br /> 
  \
 This project includes data ETL, model optimization, side diagonistic, business insight and budget optimization. <br />
 
