@@ -553,18 +553,57 @@ planned.activity[,c(media.channels)]
 # display by campaign
 # search by types
 # facebook by campaign
-# wechat
+# wechat)
+# https://stackoverflow.com/questions/34092237/applying-dplyrs-rename-to-all-columns-while-using-pipe-operator/45621698
+df.side.facebok <- contribution %>%
+                    select(c('Period','Facebook.Impressions.lag.2.power.2.decay.2')) %>%
+                    cbind(FacebookBrandingImpressions=transformaton_sequence(df, 
+                                                    c('lag','power','decay'), c(1,1,1), c(1, 1, 0.9), 'FacebookBrandingImpressions'),
+                          FacebookHolidayImpressions=transformaton_sequence(df, 
+                                                    c('lag','power','decay'), c(1,1,1), c(1, 1, 1), 'FacebookHolidayImpressions'),
+                          FacebookOtherImpressions=transformaton_sequence(df, 
+                                                    c('lag','power','decay'), c(1,1,1), c(1, 0.8, 0.8), 'FacebookOtherImpressions')) %>%
+                    `colnames<-`(c('Period','facebook_contribution','FacebookBrandingImpressions','FacebookHolidayImpressions','FacebookOtherImpressions'))
+side.model.facebook = lm(data = df.side.facebok, facebook_contribution~
+                          0+
+                          FacebookBrandingImpressions+
+                          FacebookHolidayImpressions+
+                          FacebookOtherImpressions,x=T)
+
+summary(side.model.facebook)
+side.facebook.contribution <- sweep(side.model.facebook$x, 2, side.model.facebook$coefficients, '*')
+side.facebook.contribution <- cbind(Period=df$Period,data.frame(side.facebook.contribution))
+side.facebook.contribution
+side.facebook.contr <- reshape2::melt(side.facebook.contribution, id.vars = ('Period'),value.name = c("contribution"))
+side.facebook.contr
+
+# https://stackoverflow.com/questions/31395209/how-to-name-each-variable-using-melt
+side.facebook.activity <- reshape2::melt(select(df.side.facebok, c('Period','FacebookBrandingImpressions','FacebookHolidayImpressions','FacebookOtherImpressions'))
+                                        , id.vars = ('Period')
+                                        , value.name = c("activity"))
+
+spend <- read.csv('/Users/ziyuanhan/Desktop/mmm_data/updated_all_mmm_files_from_googledrive/MMM Bootcamp Season 11 Class 2 (Sun)/Week7/Data for Side Model.csv')
+spend$Period <- as.Date(spend$Period, format = '%m/%d/%Y')
+spend <- reshape2::melt(select(spend, c('Period','FacebookBrandingImpressions','FacebookHolidayImpressions','FacebookOtherImpressions'))
+               , id.vars = ('Period')
+               , value.name = c("spend"))
+
+tmp <- full_join(side.facebook.contr,side.facebook.activity,by=c('Period','variable'))
+tmp <- full_join(tmp,spend,by=c('Period','variable'))
+write.csv(tmp, file='./tableau_data/facebook_side_contribution_activity.csv', row.names=F)
 
 
-??sweep
 
 
 
 
 
+colSums(side.facebook.contribution)
+
+side.model.display$coefficients
 
 
-
+contribution
 
 
 
