@@ -1,8 +1,8 @@
 # Marketing Mix Modelling project
-This is an end-to-end project on marketing mix modelling of a Chinese branch US-based female quick fashion brand's marketing activities and environment activities between 2014 and 2017. <br /> 
- \
+This is an end-to-end project on marketing mix modelling of a Chinese branch US-based female quick fashion brand's marketing activities and environment activities between 2014 and 2017. 
+\
 
- Final presentation deck can be viewed here [(Powerpoint)](MySQL/data_preprocess.sql) <br />
+Final presentation deck can be viewed here [(Powerpoint)](MySQL/data_preprocess.sql).
 
 ## TLDR This project includes:
 * Maintaining ETL data pipeline in MySQL server [(sql)](MySQL/data_preprocess.sql),
