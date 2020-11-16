@@ -1,12 +1,15 @@
 # Marketing Mix Modelling project
 This is an end-to-end project on marketing mix modelling of a Chinese branch US-based female quick fashion brand's marketing activities and environment activities between 2014 and 2017. <br /> 
  \
-This project includes:
-	Maintaining ETL data pipeline in MySQL server [(sql)](MySQL/data_preprocess.sql),
-	Transformation & model building in R [(R transformation section)](MySQL/data_preprocess.sql),
-	Business insight & visualization in Tableau [(Tableau workbook)](MySQL/data_preprocess.sql),  
-	Side diagonistic[(R side diagnosis section)](MySQL/data_preprocess.sql), 
-	Budget spending optimization & recommendation [(R optimization section)](MySQL/data_preprocess.sql). <br />
+
+ Final presentation deck can be viewed here [(Powerpoint)](MySQL/data_preprocess.sql) <br />
+
+## TLDR This project includes:
+* Maintaining ETL data pipeline in MySQL server [(sql)](MySQL/data_preprocess.sql),
+* Transformation & model building in R [(R transformation section)](MySQL/data_preprocess.sql),
+* Business insight & visualization in Tableau [(Tableau workbook)](MySQL/data_preprocess.sql),  
+* Side diagonistic[(R side diagnosis section)](MySQL/data_preprocess.sql), 
+* Budget spending optimization & recommendation [(R optimization section)](MySQL/data_preprocess.sql)
 
 ## TLDR
 * Collected, aggreagted, cleaned data using MySQL to manage ETL process.
