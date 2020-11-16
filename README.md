@@ -1,16 +1,17 @@
-# Marketing Mix Modelling project
+# Marketing Mix Modelling Project
 This is an end-to-end project on marketing mix modelling of a Chinese branch US-based female quick fashion brand on data between 2014 and 2017. 
 
-The goal of this project is to evaluate 2017 performance and provide actionable recommendation for  2018. 
+The goal of this project is to evaluate 2017 performance and provide actionable recommendation for 2018. 
 
 Final presentation deck can be viewed here [(Powerpoint)](final_presentation.pdf).
 
-## TLDR This project includes:
+## TLDR: this project includes:
 * Maintaining ETL data pipeline in MySQL server [(MySQL code)](MySQL/data_preprocess.sql)
-* Transformation & model selection in R [(R transformation section)](R/mmm_premodel_transformation.R)
+* Data Transformation & model selection in R [(R transformation section)](R/mmm_premodel_transformation.R)
 * Business insight & visualization dashboard in Tableau ([Powerpoint](final_presentation.pdf), [Tableau workbook](MySQL/data_preprocess.sql))
 * Side diagonistic[(R side diagnosis section)](R/mmm_premodel_transformation.R)
 * Budget spending optimization & recommendation in R [(R optimization section)](R/mmm_premodel_transformation.R)
+* Final presentation with company team [(Powerpoint)](final_presentation.pdf)
 
 ## Technical summary for tools & models
 * Collected, aggreagted, cleaned data using MySQL to manage ETL process.
@@ -27,7 +28,7 @@ Final presentation deck can be viewed here [(Powerpoint)](final_presentation.pdf
 * [Data Transformation in R & Python](#Data-Transformation-in-R-&-Python) 
 * [Model Selection & Evaluation](#Model-Selection-&-Evaluation)
 * [Side Diagonistic](Side-Diagonistic)
-* [Visualizaiton data aggregation in R](Business-Visualizaiton-data-preparation-in-R)
+* [Visualizaiton data preparation in R](Business-Visualizaiton-data-preparation-in-R)
 * [Tableau Visualization](#visualization)
 * [Budget Optimization in R](#budget-optimization)
 
@@ -57,12 +58,31 @@ Data [(link)]() is limited to header and 1 line of encoded value.
 
 
 ## MySQL ETL pipeline for preprocessing
-MySQL to aggregate all teams' marketing activities together [(MySQL code)](MySQL/data_preprocess.sql).
-* To make ETL more robust, I assume 2015-data is preloaded and 2017-data which has 6-month overlap is added later.
-* I only selected 1-3 drivers for each channel to reduce model collinearity and simplicity of this project.
-* Dependent variables (sales volume) and independent variables (drivers of growth) are aggregated on weekly level to reduce daily noise.
-* Special event such as Black-Friday/Christmas/July-4th are later added in modelling stage.
+Aggregated all teams' marketing activities in MySQL server [(MySQL code)](MySQL/data_preprocess.sql).
+* To make ETL more robust, 2015-data is preloaded, and 2017-data with 6-month overlap is added later.
+* Only select 1-3 drivers for each channel for simplicity of this project.
+* data is aggregated on weekly level to reduce noise and overfitting.
 * Other detail can be found in sql notes
+```bash
+├── app
+│   ├── css
+│   │   ├── **/*.css
+│   ├── favicon.ico
+│   ├── images
+│   ├── index.html
+│   ├── js
+│   │   ├── **/*.js
+│   └── partials/template
+├── dist (or build)
+├── node_modules
+├── bower_components (if using bower)
+├── test
+├── Gruntfile.js/gulpfile.js
+├── README.md
+├── package.json
+├── bower.json (if using bower)
+└── .gitignore
+```
 
 
 ## Data Transformation in R
