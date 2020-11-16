@@ -3,14 +3,14 @@ This is an end-to-end project on marketing mix modelling of a Chinese branch US-
 
 The goal of this project is to evaluate 2017 performance and provide actionable recommendation for  2018. 
 
-Final presentation deck can be viewed here [(Powerpoint)](MySQL/data_preprocess.sql).
+Final presentation deck can be viewed here [(Powerpoint)](final_presentation.pdf).
 
 ## TLDR This project includes:
-* Maintaining ETL data pipeline in MySQL server [(sql)](MySQL/data_preprocess.sql)
-* Transformation & model selection in R [(R transformation section)](MySQL/data_preprocess.sql)
-* Business insight & visualization dashboard in Tableau ([Powerpoint](MySQL/data_preprocess.sql), [Tableau workbook](MySQL/data_preprocess.sql))
-* Side diagonistic[(R side diagnosis section)](MySQL/data_preprocess.sql)
-* Budget spending optimization & recommendation in R [(R optimization section)](MySQL/data_preprocess.sql) [(same process in Excel solver)](MySQL/data_preprocess.sql)
+* Maintaining ETL data pipeline in MySQL server [(MySQL code)](MySQL/data_preprocess.sql)
+* Transformation & model selection in R [(R transformation section)](R/mmm_premodel_transformation.R)
+* Business insight & visualization dashboard in Tableau ([Powerpoint](final_presentation.pdf), [Tableau workbook](MySQL/data_preprocess.sql))
+* Side diagonistic[(R side diagnosis section)](R/mmm_premodel_transformation.R)
+* Budget spending optimization & recommendation in R [(R optimization section)](R/mmm_premodel_transformation.R)
 
 ## Technical summary for tools & models
 * Collected, aggreagted, cleaned data using MySQL to manage ETL process.
@@ -24,12 +24,12 @@ Final presentation deck can be viewed here [(Powerpoint)](MySQL/data_preprocess.
 ## Table of Content
 * [Data Description](#data-description)
 * [MySQL ETL pipeline for preprocessing](#MySQL-ETL-pipeline-for-preprocessing)
-* [Data Transformation in R & Python] 
-* [Model Selection & Evaluation](#modelling)
-* [Side Diagonistic]
-* [Business Visualizaiton data preparation in R]
+* [Data Transformation in R & Python](#Data-Transformation-in-R-&-Python) 
+* [Model Selection & Evaluation](#Model-Selection-&-Evaluation)
+* [Side Diagonistic](Side-Diagonistic)
+* [Visualizaiton data aggregation in R](Business-Visualizaiton-data-preparation-in-R)
 * [Tableau Visualization](#visualization)
-* [Budget Optimization in R & Excel Solver](#budget-optimization)
+* [Budget Optimization in R](#budget-optimization)
 
 
 ## Data Description
@@ -46,17 +46,18 @@ Data [(link)]() is limited to header and 1 line of encoded value.
     - MMM_Offline_TV_Magazine.csv
     - MMM_Wechat.csv
 * Marketing spending
-	- 
+	- MMM_Spending.csv
 * Competitor
     - MMM_Comp_Media_Spend.csv
 * Environment (could include market specific) 
+	- CCI.csv
 * Other
     - MMM_Date_Metadata.csv
     - MMM_DMA_HH.csv
 
 
 ## MySQL ETL pipeline for preprocessing
-MySQL to aggregate all teams' marketing activities together [(code)](MySQL/data_preprocess.sql).
+MySQL to aggregate all teams' marketing activities together [(MySQL code)](MySQL/data_preprocess.sql).
 * To make ETL more robust, I assume 2015-data is preloaded and 2017-data which has 6-month overlap is added later.
 * I only selected 1-3 drivers for each channel to reduce model collinearity and simplicity of this project.
 * Dependent variables (sales volume) and independent variables (drivers of growth) are aggregated on weekly level to reduce daily noise.
@@ -64,8 +65,8 @@ MySQL to aggregate all teams' marketing activities together [(code)](MySQL/data_
 * Other detail can be found in sql notes
 
 
-## Data Transformation in R & Python
-* Adding Lag, Decay to 6 selected marketing channels, apply Power curve [(R)](R/mmm_premodel_transformation.R) [(Python)](Python/premodelling_data_transformation.ipynb).
+## Data Transformation in R
+* Adding Lag, Decay to 6 selected marketing channels, apply Power curve [(R)](R/mmm_premodel_transformation.R).
 * Advertising intensity, competitive interference and wear-out impacts on advertising effectiveness, but for simiplicity we only look at:
     - Lag
     - Decay
@@ -99,13 +100,11 @@ MySQL to aggregate all teams' marketing activities together [(code)](MySQL/data_
 |    Wechat   |     0.9     |  1  |   1   |
 
 
-## Model Selection & Visualization
+## Model Selection & Evaluation
 
 ## Evaluation & Side Diagonistic
 
 ## Budget optimization
-
-## Presentation
 
 
 
