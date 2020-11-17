@@ -208,7 +208,6 @@ I picked Facebook as an example, built another multi-variates linear regression:
 ```
 <img src="plot/side_eff.png" width="1500" height="170"/>
 
-SIDE DIAG BAR TABLE
 
 ## 2018 Budget optimization
 **R optimization section [R code](MySQL/data_preprocess.sql)** \
