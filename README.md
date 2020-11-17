@@ -189,6 +189,6 @@ I picked Facebook as an example, built another multi-variates linear regression:
 
 
 ## Final Presentation
-**Full [Powerpoint](final_presentation.pdf)** \
+**Full [Powerpoint](final_presentation.pdf)** 
 
 
