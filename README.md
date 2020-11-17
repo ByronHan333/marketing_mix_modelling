@@ -179,6 +179,8 @@ EDA capture anomalies      |
 :-------------------------:|
 ![](plot/eda_sales_period.png) |
 
+<img src="plot/eda_sales_period.png" width="100" height="100"/>
+
 ## Model Result Evaluation 
 **You can read in final_presentation [Powerpoint](final_presentation.pdf) or download and open Tableau workbook here: [Tableau workbook](MySQL/data_preprocess.sql)).**
 * I built tableau dashboards to visualize model results over all channels between 2016/2017, including 
