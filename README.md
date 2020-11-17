@@ -175,11 +175,14 @@ In a few words, model is selected to maximize to R^2 and minimize MAPE(mean abso
 #### How were the marketing channels performing compared to 2016?
 ![x](/final_presentation/Slide8.jpeg)
 ![x](/final_presentation/Slide9.jpeg)
-What are the effectiveness and efficiency (ROI) for each channel?
+
+#### What are the effectiveness and efficiency (ROI) for each channel?
 ![x](/final_presentation/Slide10.jpeg)
-How should we optimize spending on difference marketing channels in 2018? 
+
+#### How should we optimize spending on difference marketing channels in 2018? 
 ![x](/final_presentation/Slide11.jpeg)
-What will the predicted sales be in 2018?
+
+#### What will the predicted sales be in 2018?
 ![x](/final_presentation/Slide12.jpeg)
 
 
