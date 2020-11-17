@@ -35,27 +35,28 @@ This is an end-to-end project on marketing mix modelling of a Chinese branch US-
 ## Data Description
 Data are sales, marketing and spending activities of the US-based fashion design brand between 2014 and 2017.
 Data example[(link)](data) is limited to header and 1 line only.
-* Sales
-    - MMM_Sales_Raw.csv
-* Marketing activity
-    - MMM_AdWordsSearch_2015.csv
-    - MMM_AdWordsSearch_2017.csv
-    - MMM_DCMDisplay_2015.csv
-    - MMM_DCMDisplay_2017.csv
-    - MMM_Event.csv
-    - MMM_Facebook.csv
-    - MMM_Offline_TV_Magazine.csv
-    - MMM_Wechat.csv
-* Marketing spending
-	- MMM_Spending.csv
-* Competitor
-    - MMM_Comp_Media_Spend.csv
-* Environment (could include market specific) 
-	- CCI.csv
-* Other
-    - MMM_Date_Metadata.csv
-    - MMM_DMA_HH.csv
-
+```bash
+├── Sales: 
+│   └── MMM_Sales_Raw.csv
+├── Marketing activity:
+│   ├── MMM_AdWordsSearch_2015.csv
+│   ├── MMM_AdWordsSearch_2017.csv
+│   ├── MMM_DCMDisplay_2015.csv
+│   ├── MMM_DCMDisplay_2017.csv
+│   ├── MMM_Event.csv
+│   ├── MMM_Facebook.csv
+│   ├── MMM_Offline_TV_Magazine.csv
+│   └── MMM_Wechat.csv
+├── Marketing spending:
+│   └── MMM_Spending.csv
+├── Competitor
+│   └── MMM_Comp_Media_Spend.csv
+├── Environment (could include other market specific) 
+│   └── CCI.csv
+└── Other
+    ├── MMM_Date_Metadata.csv
+    └── MMM_DMA_HH.csv
+```
 
 ## MySQL ETL pipeline for preprocessing
 **Aggregated marketing activities for MMM model & side diagnosis in MySQL server [(MySQL code)](MySQL/data_preprocess.sql).**
@@ -181,7 +182,7 @@ I picked Facebook as an example, built another multi-variates linear regression:
 
 ## Budget optimization
 **R optimization section [R code](MySQL/data_preprocess.sql)** \
-**Excel solver [Excel](MySQL/data_preprocess.sql)**  \
+**Excel solver [Excel](MySQL/data_preprocess.sql)**  
 * First for marketing activities, I distributed the spending into different channel according to their activity in 2017, and multiplied by new-channel-spending/old-channel-spending.
 * For non-marketing activities, I used 2017 data.
 * Finally, I aggreagted data and used coefficient from best model to calculate result.
@@ -190,5 +191,6 @@ I picked Facebook as an example, built another multi-variates linear regression:
 
 ## Final Presentation
 **Full [Powerpoint](final_presentation.pdf)** 
+
 
 
