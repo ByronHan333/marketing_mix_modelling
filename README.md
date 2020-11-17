@@ -1,10 +1,12 @@
+[![Build Status](https://travis-ci.org/AOEpeople/Tagging.svg?branch=master)](https://travis-ci.org/AOEpeople/Tagging)
+
 # Marketing Mix Modelling Project
 This is an end-to-end project on marketing mix modelling of a Chinese branch US-based female quick fashion brand on data between 2014 and 2017. 
 
 * The goal of this project is to evaluate 2017 performance and provide actionable recommendation for 2018.
 * Final Presentation Powerpoint here: [(Powerpoint)](final_presentation.pdf).
 
-## TLDR: this project includes:
+## TLDR, this project includes:
 * Maintaining ETL data pipeline in MySQL server [(MySQL code)](MySQL/data_preprocess.sql)
 * Data Transformation & model selection in R [(R transformation section)](R/mmm_premodel_transformation.R)
 * Business insight & visualization dashboard in Tableau ([Powerpoint](final_presentation.pdf), [Tableau workbook](MySQL/data_preprocess.sql))
@@ -26,12 +28,12 @@ This is an end-to-end project on marketing mix modelling of a Chinese branch US-
 ## Table of Content
 * [Data Description](#data-description)
 * [MySQL ETL pipeline for preprocessing](#MySQL-ETL-pipeline-for-preprocessing)
-* [Data Transformation in R & Python](#Data-Transformation-in-R-&-Python) 
+* [Data Transformation in R](#Data-Transformation-in-R) 
 * [Model Selection & Evaluation](#Model-Selection-&-Evaluation)
-* [Side Diagonistic](Side-Diagonistic)
-* [Visualizaiton data preparation in R](Business-Visualizaiton-data-preparation-in-R)
-* [Tableau Visualization](#visualization)
-* [Budget Optimization in R](#budget-optimization)
+* [Model Result Evaluation](M#odel-Result-Evaluation)
+* [Side Diagnosis](#Side-Diagnosis)
+* [2018 Budget optimization](#2018-Budget-optimization)
+* [Final Presentation](#Final-Presentation)
 
 
 ## Data Description
@@ -138,7 +140,7 @@ Data example[(link)](data) is limited to header and 1 line only.
 
 
 ## Model Selection & Evaluation
-**R Model selection code: [R code](MySQL/data_preprocess.sql)** \
+**R Model selection code: [R code](MySQL/data_preprocess.sql)** 
 * To reduce model overfitting, Final model is a multi-variates linear regression between Sales Volume and baseline variable, transformed marketing variable & competitor spending. \
 * In a few words, model is selected to maximize to R^2 and minimize MAPE(mean absolute percentage error) without breaking statistical & business criterias. More details are written below.
 ```bash
@@ -166,12 +168,12 @@ Data example[(link)](data) is limited to header and 1 line only.
 ## Model Result Evaluation 
 **You can read in final_presentation [Powerpoint](final_presentation.pdf) or download and open Tableau workbook here: [Tableau workbook](MySQL/data_preprocess.sql)).**
 * I built tableau dashboards to visualize model results over all channels between 2016/2017, including 
-	- Actual vs Model (AVM), 
+	- Actual vs Model (AVM) 
 	- Sales contributions in marketing vs non-marketing
 	- Compare sales change in 2016 vs 2017 
 	- Comapre media effectiveness & efficiency
 
-## Side Diagonistic
+## Side Diagnosis
 **R side analysis section: [R code](MySQL/data_preprocess.sql)** \
 I picked Facebook as an example, built another multi-variates linear regression:
 ```bash
@@ -182,7 +184,7 @@ I picked Facebook as an example, built another multi-variates linear regression:
  	└── Other
  ```
 
-## Budget optimization
+## 2018 Budget optimization
 **R optimization section [R code](MySQL/data_preprocess.sql)** \
 **Excel solver [Excel](MySQL/data_preprocess.sql)**  
 * First for marketing activities, I distributed the spending into different channel according to their activity in 2017, and multiplied by new-channel-spending/old-channel-spending.
