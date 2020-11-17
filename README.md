@@ -179,7 +179,7 @@ Actual vs Model      |  model 2017 sales contribution breakdown
 :-------------------------:|:-------------------------:
 ![](plot/avm2.png)  |  ![](plot/contri_2017.png)
 
-<img src="/plot/2017_all_breakdown.png" width="800" height="600"/>
+<img src="plot/2017_all_breakdown.png" width="800" height="600"/>
 
 ## Model Result Evaluation 
 **You can read in final_presentation [Powerpoint](final_presentation.pdf) or download and open Tableau workbook here: [Tableau workbook](MySQL/data_preprocess.sql)).**
