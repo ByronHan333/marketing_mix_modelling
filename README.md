@@ -64,23 +64,23 @@ Data example[(link)](data) is limited to header and 1 line only.
 * Final data for R:
 ```bash
 ├── Sales
-├── FacebookImpression 
+├── Facebook Impressions 
 │   ├── Total
 │   ├── Branding
 │   ├── Holiday
 │   └── Other
-├── Google Ad Search Impressions
+├── Google Ad Search Clicks
 │   ├── Total
 │   ├── Branding
 │   ├── AlwaysOn
 │   └── Website
-├── Display
+├── Display Impressions
 │   ├── Total
 │   ├── Branding
 │   ├── AlwaysOn
 │   ├── Website
 │   └── Holiday
-├── WeChat
+├── WeChat Read
 │   ├── Total
 │   ├── Article
 │   ├── Moment
@@ -136,7 +136,24 @@ Lag, Decay and Power is applied to 6 marketing channels [(R)](R/mmm_premodel_tra
 
 
 ## Model Selection & Evaluation
-
+To reduce model overfitting, Final model is a multi-linear regression between Sales Volume and baseline variable, transformed marketing variable & competitor spending. \
+```bash
+├── Dependent Variable: Sales
+└── Independent Variables:
+    ├── Marketing controllable:
+    │   ├── Facebook Impression Total
+    │   ├── Google Ad Search Clicks Total
+    │   ├── Display Impressions Total
+    │   ├── WeChat Read Total
+    │   ├── National TV
+    │   └── Magazine
+    ├── Sales Event (non-marketing controllable)
+    ├── Baseline:
+    │   ├── Black Friday (company specific)
+    │   ├── July 4th (company specific)
+    │   └── CCI (non-company specific)
+    └── Competitor Spend
+```
 ## Evaluation & Side Diagonistic
 
 ## Budget optimization
