@@ -1,7 +1,18 @@
 # Marketing Mix Modelling Project
 This is an end-to-end project on marketing mix modelling of a Chinese branch US-based female quick fashion brand on data between 2014 and 2017. 
 
-The goal of this project is to evaluate 2017 performance and provide actionable recommendation for 2018. 
+The goal of this project is to evaluate 2017 performance and provide actionable recommendation for 2018.
+How did different marketing channels contribute our sales in 2017?
+![p1](/final_presentation/Slide6.jpeg)
+How were the marketing channels performing compared to 2016?
+![GitHub Logo](/images/logo.png)
+What are the effectiveness and efficiency (ROI) for each channel?
+![GitHub Logo](/images/logo.png)
+How should we optimize spending on difference marketing channels in 2018? 
+![GitHub Logo](/images/logo.png)
+What will the predicted sales be in 2018?
+![GitHub Logo](/images/logo.png)
+ 
 
 Final presentation deck can be viewed here [(Powerpoint)](final_presentation.pdf).
 
@@ -155,12 +166,13 @@ In a few words, model is selected to maximize to R^2 and minimize MAPE(mean abso
     │   └── CCI (non-company specific)
     └── Competitor Spend
 ```
-* Start with baseline variables * non-marketing controllable as baseline model.
+* Start with baseline variables & non-marketing controllable as baseline model.
 * Then add marketing variables, start with the channel with the most spending, choose the transformation between the most R^2, smallest p-value, least MAPE.
 * During the process, check statistical validity such as p-value, VIF, residual error, qq-plot etc, check sign of coefficient etc.
 * Detailed variables are omitted to reduce overfitting and data granularity.
 
 ## Model Result Evaluation 
+![GitHub Logo](/images/logo.png)
 
 ## Side Diagonistic
 
