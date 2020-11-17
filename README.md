@@ -206,6 +206,7 @@ I picked Facebook as an example, built another multi-variates linear regression:
     ├── Holiday
     └── Other
 ```
+<img src="plot/side_eff.png" width="1500" height="300"/>
 
 SIDE DIAG BAR TABLE
 
@@ -217,7 +218,7 @@ SIDE DIAG BAR TABLE
 * Finally, I aggreagted data and used coefficient from best model to calculate result.
 * I used lpSolve to find the solution. and also replicated the process in Excel solver.
 
-LAST TWO BOX
+<img src="plot/optimization.png" width="1500" height="300"/>
 
 
 ## Final Presentation
