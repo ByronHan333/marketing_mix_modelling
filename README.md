@@ -149,7 +149,8 @@ Data example[(link)](data) is limited to header and 1 line only.
 * To reduce model overfitting, Final model is a multi-variates linear regression between Sales Volume and baseline variable, transformed marketing variable & competitor spending. \
 * In a few words, model is selected to maximize to R^2 and minimize MAPE(mean absolute percentage error) without breaking statistical & business criterias. More details are written below.
 ```bash
-├── Dependent Variable: Sales
+├── Dependent Variable: 
+│   └── Sales
 └── Independent Variables:
     ├── Marketing controllable:
     │   ├── Facebook Impression Total
@@ -182,7 +183,8 @@ Data example[(link)](data) is limited to header and 1 line only.
 **R side analysis section: [R code](MySQL/data_preprocess.sql)** \
 I picked Facebook as an example, built another multi-variates linear regression:
 ```bash
-├── Dependent Variable: Sales contributions by Facebook
+├── Dependent Variable: 
+│   └── Sales contributions by Facebook
 └── Independent Variables:
     ├── Branding
  	├── Holiday
