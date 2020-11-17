@@ -146,7 +146,7 @@ Data example[(link)](data) is limited to header and 1 line only.
 
 ## Model Selection & Evaluation
 **R Model selection code: [R code](MySQL/data_preprocess.sql)** 
-* To reduce model overfitting, Final model is a multi-variates linear regression between Sales Volume and baseline variable, transformed marketing variable & competitor spending. \
+* To reduce model overfitting, Final model is a multi-variates linear regression between Sales Volume and baseline variable, transformed marketing variable & competitor spending. 
 * In a few words, model is selected to maximize to R^2 and minimize MAPE(mean absolute percentage error) without breaking statistical & business criterias. More details are written below.
 ```bash
 ├── Dependent Variable: 
