@@ -187,8 +187,8 @@ I picked Facebook as an example, built another multi-variates linear regression:
 │   └── Sales contributions by Facebook
 └── Independent Variables:
     ├── Branding
- 	├── Holiday
- 	└── Other
+    ├── Holiday
+    └── Other
 ```
 
 ## 2018 Budget optimization
