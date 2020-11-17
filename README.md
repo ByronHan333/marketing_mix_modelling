@@ -13,10 +13,10 @@ This is an end-to-end project on marketing mix modelling of a Chinese branch US-
 
 ## TLDR, this project includes:
 * Maintaining ETL data pipeline in MySQL server [(MySQL code)](MySQL/data_preprocess.sql)
-* Data Transformation & model selection in R [(R transformation section)](R/mmm_premodel_transformation.R)
+* Data Transformation & model selection in R [(R transformation section & Model section)](https://rpubs.com/zhan12/692404)
 * Model evaluation & Business insight visualization in Tableau ([Powerpoint](final_presentation.pdf), [Tableau workbook](Tableau/mmm.twb))
-* Side diagonistic[(R side diagnosis section)](R/mmm_premodel_transformation.R)
-* Budget spending optimization & recommendation in R [(R optimization section)](R/mmm_premodel_transformation.R)
+* Side diagonistic[(R side diagnosis section)](https://rpubs.com/zhan12/692404)
+* Budget spending optimization & recommendation in R [(R optimization section)](https://rpubs.com/zhan12/692404)
 * Final presentation with company team [(Powerpoint)](final_presentation.pdf)
 
 <!-- 
@@ -113,7 +113,7 @@ EDA capture anomalies      |  EDA correlation overview
 
 
 ## Data Transformation in R
-**Lag, Decay and Power is applied to 6 marketing channels [(R)](R/mmm_premodel_transformation.R).**
+**Lag, Decay and Power is applied to 6 marketing channels [(R Code)](https://rpubs.com/zhan12/692404).**
 
 |             |    Decay    | Lag | Alpha |
 |:-----------:|:-----------:|:---:|:-----:|
@@ -196,7 +196,7 @@ loss breakdown by group      |  loss breakdown by detail
 <img src="plot/overall_eff.png" width="1500" height="300"/>
 
 ## Side Diagnosis
-**R side analysis section: [R code](MySQL/data_preprocess.sql)** \
+**R side analysis section: [R code](https://rpubs.com/zhan12/692404)** \
 I picked Facebook as an example, built another multi-variates linear regression:
 ```bash
 ├── Dependent Variable: 
@@ -210,7 +210,7 @@ I picked Facebook as an example, built another multi-variates linear regression:
 
 
 ## 2018 Budget optimization
-**R optimization section [R code](MySQL/data_preprocess.sql)**  
+**R optimization section [R code](https://rpubs.com/zhan12/692404)**  
 * First for marketing activities, I distributed the spending into different channel according to their activity in 2017, and multiplied by new-channel-spending/old-channel-spending.
 * For non-marketing activities, I used 2017 data.
 * Finally, I aggreagted data and used coefficient from best model to calculate result.
