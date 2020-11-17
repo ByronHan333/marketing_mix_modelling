@@ -148,7 +148,7 @@ EDA capture anomalies      |  EDA correlation overview
     - More other diminishin return models can be found [here](https://www.lexjansen.com/nesug/nesug08/sa/sa03.pdf) or other online resources.
 
 
-## Model Selection & Evaluation
+## Model Selection and Evaluation
 **R Model selection code: [R code](MySQL/data_preprocess.sql)** 
 * To reduce model overfitting, Final model is a multi-variates linear regression between Sales Volume and baseline variable, transformed marketing variable & competitor spending. 
 * In a few words, model is selected to maximize to R^2 and minimize MAPE(mean absolute percentage error) without breaking statistical & business criterias. More details are written below.
