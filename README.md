@@ -189,8 +189,11 @@ Actual vs Model      |  model 2017 sales contribution breakdown
 	- Compare sales change in 2016 vs 2017 
 	- Comapre media effectiveness & efficiency
 
-WATERFALL PLOT
-ALL OTHER PLOT
+loss breakdown by group      |  loss breakdown by detail
+:-------------------------:|:-------------------------:
+![](plot/2017_loss_breakdown_grp.png)  |  ![](plot/2017_loss_breakdown_detail.png)
+
+<img src="plot/overall_eff.png" width="800" height="500"/>
 
 ## Side Diagnosis
 **R side analysis section: [R code](MySQL/data_preprocess.sql)** \
