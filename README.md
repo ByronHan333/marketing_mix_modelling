@@ -1,9 +1,9 @@
-[![Generic badge](https://img.shields.io/badge/Author-Ziyuan%20Han-<COLOR>.svg)](https://www.linkedin.com/in/ziyuan-byron-han/)
-[![Generic badge](https://img.shields.io/badge/Topic-Data%20Science-42ba18.svg)](https://www.linkedin.com/in/ziyuan-byron-han/)
+[![Generic badge](https://img.shields.io/badge/Author-Ziyuan%20Han-fbb4ae.svg)](https://www.linkedin.com/in/ziyuan-byron-han/)
+[![Generic badge](https://img.shields.io/badge/Topic-Data%20Science-9cf.svg)](https://www.linkedin.com/in/ziyuan-byron-han/)
 [![Generic badge](https://img.shields.io/badge/Topic-Marketing%20Mix%20Modelling-9cf.svg)](https://www.linkedin.com/in/ziyuan-byron-han/)
-[![Generic badge](https://img.shields.io/badge/Technology-MySQL-66ff00.svg)](https://www.linkedin.com/in/ziyuan-byron-han/)
-[![Generic badge](https://img.shields.io/badge/Technology-R-<COLOR>.svg)](https://www.linkedin.com/in/ziyuan-byron-han/)
-[![Generic badge](https://img.shields.io/badge/Technology-Tableau-<COLOR>.svg)](https://www.linkedin.com/in/ziyuan-byron-han/)
+[![Generic badge](https://img.shields.io/badge/Technology-MySQL-42ba18.svg)](https://www.linkedin.com/in/ziyuan-byron-han/)
+[![Generic badge](https://img.shields.io/badge/Technology-R-42ba18.svg)](https://www.linkedin.com/in/ziyuan-byron-han/)
+[![Generic badge](https://img.shields.io/badge/Technology-Tableau-42ba18.svg)](https://www.linkedin.com/in/ziyuan-byron-han/)
 
 # Marketing Mix Modelling Project
 This is an end-to-end project on marketing mix modelling of a Chinese branch US-based female quick fashion brand on data between 2014 and 2017. 
