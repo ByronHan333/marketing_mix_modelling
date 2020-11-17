@@ -181,7 +181,11 @@ I picked Facebook as an example, built another multi-variates linear regression:
 
 ## Budget optimization
 **R optimization section [R code](MySQL/data_preprocess.sql)** \
-Excel solver [Excel](MySQL/data_preprocess.sql)
+**Excel solver [Excel](MySQL/data_preprocess.sql)**  \
+* First for marketing activities, I distributed the spending into different channel according to their activity in 2017, and multiplied by new-channel-spending/old-channel-spending.
+* For non-marketing activities, I used 2017 data.
+* Finally, I aggreagted data and used coefficient from best model to calculate result.
+* I used lpSolve to find the solution. and also replicated the process in Excel solver.
 
 
 ## Final Presentation
