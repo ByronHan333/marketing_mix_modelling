@@ -14,7 +14,7 @@ This is an end-to-end project on marketing mix modelling of a Chinese branch US-
 ## TLDR, this project includes:
 * Maintaining ETL data pipeline in MySQL server [(MySQL code)](MySQL/data_preprocess.sql)
 * Data Transformation & model selection in R [(R transformation section)](R/mmm_premodel_transformation.R)
-* Business insight & visualization dashboard in Tableau ([Powerpoint](final_presentation.pdf), [Tableau workbook](MySQL/data_preprocess.sql))
+* Business insight & visualization workbook in Tableau ([Powerpoint](final_presentation.pdf), [Tableau workbook](MySQL/data_preprocess.sql))
 * Side diagonistic[(R side diagnosis section)](R/mmm_premodel_transformation.R)
 * Budget spending optimization & recommendation in R [(R optimization section)](R/mmm_premodel_transformation.R)
 * Final presentation with company team [(Powerpoint)](final_presentation.pdf)
@@ -24,7 +24,7 @@ This is an end-to-end project on marketing mix modelling of a Chinese branch US-
 * Collected, aggreagted, cleaned data using MySQL to manage ETL process.
 * Created EDA data visualizaiton using Tableau.
 * Performed multivariate regression models using R to evaluate marketing tactics impact.
-* Built Tableau dashboards to visualize model results; Also including informative AVM, model contributions, media ROIs to deliver key business insights.
+* Built Tableau workbooks to visualize model results; Also including informative AVM, model contributions, media ROIs to deliver key business insights.
 * Analyzed effectiveness and efficiency of media activities (e.g., TV GRPs, Paid Search Clicks, Facebook ads, Display Impressions, etc.).
 * Provided actionable recommendation on budget optimization using Excel Solver.
 * Created presentation deck to summarize model findings and presented result to marketing team.
@@ -183,7 +183,7 @@ Actual vs Model      |  model 2017 sales contribution breakdown
 
 ## Model Result Evaluation 
 **You can read in final_presentation [Powerpoint](final_presentation.pdf) or download and open Tableau workbook here: [Tableau workbook](MySQL/data_preprocess.sql)).**
-* I built tableau dashboards to visualize model results over all channels between 2016/2017, including 
+* I built tableau workbooks to visualize model results over all channels between 2016/2017, including 
 	- Actual vs Model (AVM) 
 	- Sales contributions in marketing vs non-marketing
 	- Compare sales change in 2016 vs 2017 
