@@ -137,6 +137,7 @@ Lag, Decay and Power is applied to 6 marketing channels [(R)](R/mmm_premodel_tra
 
 ## Model Selection & Evaluation
 To reduce model overfitting, Final model is a multi-linear regression between Sales Volume and baseline variable, transformed marketing variable & competitor spending. \
+In a few words, model is selected to maximize to R^2 and minimize MAPE(mean absolute percentage error) without breaking statistical & business criterias. More details are written below.
 ```bash
 ├── Dependent Variable: Sales
 └── Independent Variables:
@@ -154,7 +155,14 @@ To reduce model overfitting, Final model is a multi-linear regression between Sa
     │   └── CCI (non-company specific)
     └── Competitor Spend
 ```
-## Evaluation & Side Diagonistic
+* Start with baseline variables * non-marketing controllable as baseline model.
+* Then add marketing variables, start with the channel with the most spending, choose the transformation between the most R^2, smallest p-value, least MAPE.
+* During the process, check statistical validity such as p-value, VIF, residual error, qq-plot etc, check sign of coefficient etc.
+* Detailed variables are omitted to reduce overfitting and data granularity.
+
+## Model Result Evaluation 
+
+## Side Diagonistic
 
 ## Budget optimization
 
