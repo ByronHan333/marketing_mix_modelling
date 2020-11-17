@@ -175,8 +175,10 @@ EDA capture anomalies      |  EDA correlation overview
 * During the process, check statistical validity such as p-value, VIF, residual error, qq-plot etc, check sign of coefficient etc.
 * Detailed variables are omitted to reduce overfitting and data granularity.
 
-<img src="plot/avm2.png" width="800" height="600"/>
-<img src="plot/contri_2017.png" width="800" height="600"/>
+Actual vs Model      |  model 2017 sales contribution breakdown
+:-------------------------:|:-------------------------:
+![](plot/avm2.png)  |  ![](plot/contri_2017.png)
+
 
 ## Model Result Evaluation 
 **You can read in final_presentation [Powerpoint](final_presentation.pdf) or download and open Tableau workbook here: [Tableau workbook](MySQL/data_preprocess.sql)).**
