@@ -206,7 +206,7 @@ I picked Facebook as an example, built another multi-variates linear regression:
     ├── Holiday
     └── Other
 ```
-<img src="plot/side_eff.png" width="1500" height="250"/>
+<img src="plot/side_eff.png" width="1500" height="470"/>
 
 SIDE DIAG BAR TABLE
 
