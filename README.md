@@ -167,7 +167,7 @@ In a few words, model is selected to maximize to R^2 and minimize MAPE(mean abso
 ## Budget optimization
 
 ## Selected business impact
-* Full [Powerpoint](final_presentation.pdf) 
+*Full [Powerpoint](final_presentation.pdf)*
 
 #### How did different marketing channels contribute our sales in 2017?
 ![x](/final_presentation/Slide6.jpeg)
