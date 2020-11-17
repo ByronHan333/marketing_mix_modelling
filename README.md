@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/AOEpeople/Tagging.svg?branch=master)](https://travis-ci.org/AOEpeople/Tagging)
+[![Generic badge](https://img.shields.io/badge/<ByronHan333>-<Marketing%20Mix%20Modelling>-<COLOR>.svg)](https://shields.io/)
 
 # Marketing Mix Modelling Project
 This is an end-to-end project on marketing mix modelling of a Chinese branch US-based female quick fashion brand on data between 2014 and 2017. 
