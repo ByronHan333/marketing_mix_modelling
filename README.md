@@ -66,7 +66,8 @@ Data example[(link)](data) is limited to header and 1 line only.
     ├── MMM_Date_Metadata.csv
     └── MMM_DMA_HH.csv
 ```
-TWO EDA PLOT
+![eda1](plot/eda_sales_period.png)
+![eda2](plot/eda_correlation_matrix.png)
 
 ## MySQL ETL pipeline for preprocessing
 **Aggregated marketing activities for MMM model & side diagnosis in MySQL server [(MySQL code)](MySQL/data_preprocess.sql).**
