@@ -189,7 +189,7 @@ I picked Facebook as an example, built another multi-variates linear regression:
     ├── Branding
  	├── Holiday
  	└── Other
- ```
+```
 
 ## 2018 Budget optimization
 **R optimization section [R code](MySQL/data_preprocess.sql)** \
