@@ -60,6 +60,7 @@ Data [(link)](data) is limited to header and 1 line of encoded value.
 ## MySQL ETL pipeline for preprocessing
 * Aggregated marketing activities for MMM model & side diagnosis in MySQL server [(MySQL code)](MySQL/data_preprocess.sql).
 * Spending is added in R section
+* Final data for R:
 ```bash
 ├── Sales
 ├── FacebookImpression 
