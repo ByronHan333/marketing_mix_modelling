@@ -1,20 +1,8 @@
 # Marketing Mix Modelling Project
 This is an end-to-end project on marketing mix modelling of a Chinese branch US-based female quick fashion brand on data between 2014 and 2017. 
 
-The goal of this project is to evaluate 2017 performance and provide actionable recommendation for 2018.
-How did different marketing channels contribute our sales in 2017?
-![p1](/final_presentation/Slide6.jpeg)
-How were the marketing channels performing compared to 2016?
-![GitHub Logo](/images/logo.png)
-What are the effectiveness and efficiency (ROI) for each channel?
-![GitHub Logo](/images/logo.png)
-How should we optimize spending on difference marketing channels in 2018? 
-![GitHub Logo](/images/logo.png)
-What will the predicted sales be in 2018?
-![GitHub Logo](/images/logo.png)
- 
-
-Final presentation deck can be viewed here [(Powerpoint)](final_presentation.pdf).
+* The goal of this project is to evaluate 2017 performance and provide actionable recommendation for 2018.
+* To read business impact, please go to the end or read Powerpoint here: [(Powerpoint)](final_presentation.pdf).
 
 ## TLDR: this project includes:
 * Maintaining ETL data pipeline in MySQL server [(MySQL code)](MySQL/data_preprocess.sql)
@@ -178,6 +166,18 @@ In a few words, model is selected to maximize to R^2 and minimize MAPE(mean abso
 
 ## Budget optimization
 
-
+## Selected business impact
+Full [Powerpoint](final_presentation.pdf) 
+How did different marketing channels contribute our sales in 2017?
+![x](/final_presentation/Slide6.jpeg)
+How were the marketing channels performing compared to 2016?
+![x](/final_presentation/Slide8.jpeg)
+![x](/final_presentation/Slide9.jpeg)
+What are the effectiveness and efficiency (ROI) for each channel?
+![x](/final_presentation/Slide10.jpeg)
+How should we optimize spending on difference marketing channels in 2018? 
+![x](/final_presentation/Slide11.jpeg)
+What will the predicted sales be in 2018?
+![x](/final_presentation/Slide12.jpeg)
 
 
