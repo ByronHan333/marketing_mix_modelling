@@ -34,7 +34,8 @@ Final presentation deck can be viewed here [(Powerpoint)](final_presentation.pdf
 
 
 ## Data Description
-Data [(link)](data) is limited to header and 1 line of encoded value.
+Data are sales, marketing and spending activities of the US-based fashion design brand between 2014 and 2017.
+Data example[(link)](data) is limited to header and 1 line only.
 * Sales
     - MMM_Sales_Raw.csv
 * Marketing activity
@@ -99,7 +100,22 @@ Data [(link)](data) is limited to header and 1 line of encoded value.
 
 
 ## Data Transformation in R
-* Adding Lag, Decay to 6 selected marketing channels, apply Power curve [(R)](R/mmm_premodel_transformation.R).
+* Lag, Decay and Power is applied to 6 marketing channels [(R)](R/mmm_premodel_transformation.R).
+|             |    Decay    | Lag | Alpha |
+|:-----------:|:-----------:|:---:|:-----:|
+| National TV |     0.8     |  0  |  0.9  |
+| National TV |     0.8     |  1  |  0.6  |
+|   Magazine  |     0.7     |  1  |  0.6  |
+|   Magazine  |     0.9     |  1  |  0.6  |
+| Paid Search |     0.9     |  0  |   1   |
+| Paid Search |     0.9     |  1  |  0.7  |
+|   Display   |     0.8     |  0  |  0.8  |
+|   Display   |      1      |  0  |   1   |
+|   Facebook  |      1      |  0  |  0.8  |
+|   Facebook  |      1      |  1  |   1   |
+|    Wechat   |     0.8     |  0  |  0.9  |
+|    Wechat   |     0.9     |  1  |   1   |
+
 * Advertising intensity, competitive interference and wear-out impacts on advertising effectiveness, but for simiplicity we only look at:
     - Lag
     - Decay
@@ -116,21 +132,6 @@ Data [(link)](data) is limited to header and 1 line of encoded value.
     - Online media noramlly has high decay.
     - More other decay models can be found [here](https://mpra.ub.uni-muenchen.de/7683/4/MPRA_paper_7683.pdf) or other online resources.
     - More other diminishin return models can be found [here](https://www.lexjansen.com/nesug/nesug08/sa/sa03.pdf) or other online resources.
-
-|             |    Decay    | Lag | Alpha |
-|:-----------:|:-----------:|:---:|:-----:|
-| National TV |     0.8     |  0  |  0.9  |
-| National TV |     0.8     |  1  |  0.6  |
-|   Magazine  |     0.7     |  1  |  0.6  |
-|   Magazine  |     0.9     |  1  |  0.6  |
-| Paid Search |     0.9     |  0  |   1   |
-| Paid Search |     0.9     |  1  |  0.7  |
-|   Display   |     0.8     |  0  |  0.8  |
-|   Display   |      1      |  0  |   1   |
-|   Facebook  |      1      |  0  |  0.8  |
-|   Facebook  |      1      |  1  |   1   |
-|    Wechat   |     0.8     |  0  |  0.9  |
-|    Wechat   |     0.9     |  1  |   1   |
 
 
 ## Model Selection & Evaluation
