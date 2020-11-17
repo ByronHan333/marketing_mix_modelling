@@ -193,7 +193,7 @@ loss breakdown by group      |  loss breakdown by detail
 :-------------------------:|:-------------------------:
 ![](plot/2017_loss_breakdown_grp.png)  |  ![](plot/2017_loss_breakdown_detail.png)
 
-<img src="plot/overall_eff.png" width="1000" height="400"/>
+<img src="plot/overall_eff.png" width="1300" height="400"/>
 
 ## Side Diagnosis
 **R side analysis section: [R code](MySQL/data_preprocess.sql)** \
