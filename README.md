@@ -66,8 +66,10 @@ Data example[(link)](data) is limited to header and 1 line only.
     ├── MMM_Date_Metadata.csv
     └── MMM_DMA_HH.csv
 ```
-![eda1](plot/eda_sales_period.png)
-![eda2](plot/eda_correlation_matrix.png)
+<!--https://stackoverflow.com/questions/24319505/how-can-one-display-images-side-by-side-in-a-github-readme-md-->
+EDA capture anomalies      |  EDA correlation overview
+:-------------------------:|:-------------------------:
+![](plot/eda_sales_period.png)  |  ![](plot/eda_correlation_matrix.png)
 
 ## MySQL ETL pipeline for preprocessing
 **Aggregated marketing activities for MMM model & side diagnosis in MySQL server [(MySQL code)](MySQL/data_preprocess.sql).**
