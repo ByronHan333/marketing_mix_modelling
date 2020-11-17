@@ -58,7 +58,7 @@ Data example[(link)](data) is limited to header and 1 line only.
 
 
 ## MySQL ETL pipeline for preprocessing
-* Aggregated marketing activities for MMM model & side diagnosis in MySQL server [(MySQL code)](MySQL/data_preprocess.sql).
+**Aggregated marketing activities for MMM model & side diagnosis in MySQL server [(MySQL code)](MySQL/data_preprocess.sql).**
 * Spending is added in R section
 * Final data for R:
 ```bash
@@ -135,7 +135,7 @@ Data example[(link)](data) is limited to header and 1 line only.
 
 
 ## Model Selection & Evaluation
-R Code: [R model section](MySQL/data_preprocess.sql)
+**R Model selection code: [R code](MySQL/data_preprocess.sql)**
 To reduce model overfitting, Final model is a multi-variates linear regression between Sales Volume and baseline variable, transformed marketing variable & competitor spending. \
 In a few words, model is selected to maximize to R^2 and minimize MAPE(mean absolute percentage error) without breaking statistical & business criterias. More details are written below.
 ```bash
@@ -161,7 +161,7 @@ In a few words, model is selected to maximize to R^2 and minimize MAPE(mean abso
 * Detailed variables are omitted to reduce overfitting and data granularity.
 
 ## Model Result Evaluation 
-You can read in final_presentation [Powerpoint](final_presentation.pdf) or download and open Tableau workbook here: [Tableau workbook](MySQL/data_preprocess.sql)).
+**You can read in final_presentation [Powerpoint](final_presentation.pdf) or download and open Tableau workbook here: [Tableau workbook](MySQL/data_preprocess.sql)).**
 * I built tableau dashboards to visualize model results over all channels between 2016/2017, including 
 	- Actual vs Model (AVM), 
 	- Sales contributions in marketing vs non-marketing
@@ -169,7 +169,7 @@ You can read in final_presentation [Powerpoint](final_presentation.pdf) or downl
 	- Comapre media effectiveness & efficiency
 
 ## Side Diagonistic
-R Code: [R side analysis section](MySQL/data_preprocess.sql)
+**R side analysis section: [R code](MySQL/data_preprocess.sql)**
 I picked Facebook as an example, built another multi-variates linear regression:
 ```bash
 ├── Dependent Variable: Sales contributions by Facebook
@@ -180,7 +180,7 @@ I picked Facebook as an example, built another multi-variates linear regression:
  ```
 
 ## Budget optimization
-R Code: [R optimization section](MySQL/data_preprocess.sql)
+**R optimization section [R code](MySQL/data_preprocess.sql)**
 Excel solver [Excel](MySQL/data_preprocess.sql)
 
 
