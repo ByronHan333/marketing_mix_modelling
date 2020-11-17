@@ -12,6 +12,7 @@ This is an end-to-end project on marketing mix modelling of a Chinese branch US-
 * Budget spending optimization & recommendation in R [(R optimization section)](R/mmm_premodel_transformation.R)
 * Final presentation with company team [(Powerpoint)](final_presentation.pdf)
 
+<!-- 
 ## Technical summary for tools & models
 * Collected, aggreagted, cleaned data using MySQL to manage ETL process.
 * Created EDA data visualizaiton using Tableau.
@@ -20,6 +21,7 @@ This is an end-to-end project on marketing mix modelling of a Chinese branch US-
 * Analyzed effectiveness and efficiency of media activities (e.g., TV GRPs, Paid Search Clicks, Facebook ads, Display Impressions, etc.).
 * Provided actionable recommendation on budget optimization using Excel Solver.
 * Created presentation deck to summarize model findings and presented result to marketing team.
+-->
 
 ## Table of Content
 * [Data Description](#data-description)
