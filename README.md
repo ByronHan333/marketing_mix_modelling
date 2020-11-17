@@ -2,7 +2,7 @@
 This is an end-to-end project on marketing mix modelling of a Chinese branch US-based female quick fashion brand on data between 2014 and 2017. 
 
 * The goal of this project is to evaluate 2017 performance and provide actionable recommendation for 2018.
-* To read business impact, please go to the end or read Powerpoint here: [(Powerpoint)](final_presentation.pdf).
+* Final Presentation Powerpoint here: [(Powerpoint)](final_presentation.pdf).
 
 ## TLDR: this project includes:
 * Maintaining ETL data pipeline in MySQL server [(MySQL code)](MySQL/data_preprocess.sql)
@@ -99,7 +99,7 @@ Data example[(link)](data) is limited to header and 1 line only.
 
 
 ## Data Transformation in R
-Lag, Decay and Power is applied to 6 marketing channels [(R)](R/mmm_premodel_transformation.R).
+**Lag, Decay and Power is applied to 6 marketing channels [(R)](R/mmm_premodel_transformation.R).**
 
 |             |    Decay    | Lag | Alpha |
 |:-----------:|:-----------:|:---:|:-----:|
@@ -135,7 +135,8 @@ Lag, Decay and Power is applied to 6 marketing channels [(R)](R/mmm_premodel_tra
 
 
 ## Model Selection & Evaluation
-To reduce model overfitting, Final model is a multi-linear regression between Sales Volume and baseline variable, transformed marketing variable & competitor spending. \
+R Code: [R model section](MySQL/data_preprocess.sql)
+To reduce model overfitting, Final model is a multi-variates linear regression between Sales Volume and baseline variable, transformed marketing variable & competitor spending. \
 In a few words, model is selected to maximize to R^2 and minimize MAPE(mean absolute percentage error) without breaking statistical & business criterias. More details are written below.
 ```bash
 ├── Dependent Variable: Sales
@@ -160,11 +161,28 @@ In a few words, model is selected to maximize to R^2 and minimize MAPE(mean abso
 * Detailed variables are omitted to reduce overfitting and data granularity.
 
 ## Model Result Evaluation 
-![GitHub Logo](/images/logo.png)
+You can read in final_presentation [Powerpoint](final_presentation.pdf) or download and open Tableau workbook here: [Tableau workbook](MySQL/data_preprocess.sql)).
+* I built tableau dashboards to visualize model results over all channels between 2016/2017, including 
+	- Actual vs Model (AVM), 
+	- Sales contributions in marketing vs non-marketing
+	- Compare sales change in 2016 vs 2017 
+	- Comapre media effectiveness & efficiency
 
 ## Side Diagonistic
+R Code: [R side analysis section](MySQL/data_preprocess.sql)
+I picked Facebook as an example, built another multi-variates linear regression:
+```bash
+├── Dependent Variable: Sales contributions by Facebook
+└── Independent Variables:
+    ├── Branding
+ 	├── Holiday
+ 	└── Other
+ ```
 
 ## Budget optimization
+R Code: [R optimization section](MySQL/data_preprocess.sql)
+Excel solver [Excel](MySQL/data_preprocess.sql)
+
 
 ## Final Presentation
 **Full [Powerpoint](final_presentation.pdf)**
