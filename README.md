@@ -66,6 +66,7 @@ Data example[(link)](data) is limited to header and 1 line only.
     ├── MMM_Date_Metadata.csv
     └── MMM_DMA_HH.csv
 ```
+TWO EDA PLOT
 
 ## MySQL ETL pipeline for preprocessing
 **Aggregated marketing activities for MMM model & side diagnosis in MySQL server [(MySQL code)](MySQL/data_preprocess.sql).**
@@ -171,6 +172,9 @@ Data example[(link)](data) is limited to header and 1 line only.
 * During the process, check statistical validity such as p-value, VIF, residual error, qq-plot etc, check sign of coefficient etc.
 * Detailed variables are omitted to reduce overfitting and data granularity.
 
+AVM PLOT
+OVER 2017 CONTRIBUTION PLOT
+
 ## Model Result Evaluation 
 **You can read in final_presentation [Powerpoint](final_presentation.pdf) or download and open Tableau workbook here: [Tableau workbook](MySQL/data_preprocess.sql)).**
 * I built tableau dashboards to visualize model results over all channels between 2016/2017, including 
@@ -178,6 +182,9 @@ Data example[(link)](data) is limited to header and 1 line only.
 	- Sales contributions in marketing vs non-marketing
 	- Compare sales change in 2016 vs 2017 
 	- Comapre media effectiveness & efficiency
+
+WATERFALL PLOT
+ALL OTHER PLOT
 
 ## Side Diagnosis
 **R side analysis section: [R code](MySQL/data_preprocess.sql)** \
@@ -191,6 +198,8 @@ I picked Facebook as an example, built another multi-variates linear regression:
     └── Other
 ```
 
+SIDE DIAG BAR TABLE
+
 ## 2018 Budget optimization
 **R optimization section [R code](MySQL/data_preprocess.sql)** \
 **Excel solver [Excel](MySQL/data_preprocess.sql)**  
@@ -198,6 +207,8 @@ I picked Facebook as an example, built another multi-variates linear regression:
 * For non-marketing activities, I used 2017 data.
 * Finally, I aggreagted data and used coefficient from best model to calculate result.
 * I used lpSolve to find the solution. and also replicated the process in Excel solver.
+
+LAST TWO BOX
 
 
 ## Final Presentation
