@@ -34,7 +34,7 @@ This is an end-to-end project on marketing mix modelling of a Chinese branch US-
 * [Data Description](#data-description)
 * [MySQL ETL pipeline for preprocessing](#MySQL-ETL-pipeline-for-preprocessing)
 * [Data Transformation in R](#Data-Transformation-in-R) 
-* [Model Selection & Evaluation](#Model-Selection-&-Evaluation)
+* [Model Selection and Evaluation](#Model-Selection-and-Evaluation)
 * [Model Result Evaluation](#Model-Result-Evaluation)
 * [Side Diagnosis](#Side-Diagnosis)
 * [2018 Budget optimization](#2018-Budget-optimization)
