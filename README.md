@@ -14,7 +14,7 @@ This is an end-to-end project on marketing mix modelling of a Chinese branch US-
 ## TLDR, this project includes:
 * Maintaining ETL data pipeline in MySQL server [(MySQL code)](MySQL/data_preprocess.sql)
 * Data Transformation & model selection in R [(R transformation section)](R/mmm_premodel_transformation.R)
-* Business insight & visualization workbook in Tableau ([Powerpoint](final_presentation.pdf), [Tableau workbook](MySQL/data_preprocess.sql))
+* Model evaluation & Business insight visualization in Tableau ([Powerpoint](final_presentation.pdf), [Tableau workbook](Tableau/mmm.twb))
 * Side diagonistic[(R side diagnosis section)](R/mmm_premodel_transformation.R)
 * Budget spending optimization & recommendation in R [(R optimization section)](R/mmm_premodel_transformation.R)
 * Final presentation with company team [(Powerpoint)](final_presentation.pdf)
@@ -182,7 +182,7 @@ Actual vs Model      |  model 2017 sales contribution breakdown
 <img src="plot/2017_all_breakdown.png" width="800" height="600"/>
 
 ## Model Result Evaluation 
-**You can read in final_presentation [Powerpoint](final_presentation.pdf) or download and open Tableau workbook here: [Tableau workbook](MySQL/data_preprocess.sql)).**
+**You can read in final_presentation [Powerpoint](final_presentation.pdf) or download and open Tableau workbook here: [Tableau workbook](Tableau/mmm.twb)).**
 * I built tableau workbooks to visualize model results over all channels between 2016/2017, including 
 	- Actual vs Model (AVM) 
 	- Sales contributions in marketing vs non-marketing
