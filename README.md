@@ -1,6 +1,6 @@
 [![Generic badge](https://img.shields.io/badge/Author-Ziyuan%20Han-blue.svg)](https://www.linkedin.com/in/ziyuan-byron-han/)
 [![Generic badge](https://img.shields.io/badge/Topic-Data%20Science-9cf.svg)](https://www.linkedin.com/in/ziyuan-byron-han/)
-[![Generic badge](https://img.shields.io/badge/Topic-Marketing%20Mix%20Modelling-9cf.svg)](https://www.linkedin.com/in/ziyuan-byron-han/)
+[![Generic badge](https://img.shields.io/badge/Topic-Marketing%20Mix%20Model-9cf.svg)](https://www.linkedin.com/in/ziyuan-byron-han/)
 [![Generic badge](https://img.shields.io/badge/Technology-MySQL-42ba18.svg)](https://www.linkedin.com/in/ziyuan-byron-han/)
 [![Generic badge](https://img.shields.io/badge/Technology-R-42ba18.svg)](https://www.linkedin.com/in/ziyuan-byron-han/)
 [![Generic badge](https://img.shields.io/badge/Technology-Tableau-42ba18.svg)](https://www.linkedin.com/in/ziyuan-byron-han/)
