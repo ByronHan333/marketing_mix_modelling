@@ -100,7 +100,8 @@ Data example[(link)](data) is limited to header and 1 line only.
 
 
 ## Data Transformation in R
-* Lag, Decay and Power is applied to 6 marketing channels [(R)](R/mmm_premodel_transformation.R).
+Lag, Decay and Power is applied to 6 marketing channels [(R)](R/mmm_premodel_transformation.R).
+
 |             |    Decay    | Lag | Alpha |
 |:-----------:|:-----------:|:---:|:-----:|
 | National TV |     0.8     |  0  |  0.9  |
