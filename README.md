@@ -1,8 +1,8 @@
-[![Generic badge](https://img.shields.io/badge/Ziyuan%20Han-Data%20Science-9cf.svg)](https://shields.io/)
-[![Generic badge](https://img.shields.io/badge/Ziyuan%20Han-Marketing%20Mix%20Modelling-9cf.svg)](https://shields.io/)
-[![Generic badge](https://img.shields.io/badge/Ziyuan%20Han-MySQL-<COLOR>.svg)](https://shields.io/)
-[![Generic badge](https://img.shields.io/badge/Ziyuan%20Han-R-<COLOR>.svg)](https://shields.io/)
-[![Generic badge](https://img.shields.io/badge/Ziyuan%20Han-Tableau-<COLOR>.svg)](https://shields.io/)
+[![Generic badge](https://img.shields.io/badge/Topic-Data%20Science-9cf.svg)](https://shields.io/)
+[![Generic badge](https://img.shields.io/badge/Topic-Marketing%20Mix%20Modelling-9cf.svg)](https://shields.io/)
+[![Generic badge](https://img.shields.io/badge/Technology-MySQL-<COLOR>.svg)](https://shields.io/)
+[![Generic badge](https://img.shields.io/badge/Technology-R-<COLOR>.svg)](https://shields.io/)
+[![Generic badge](https://img.shields.io/badge/Technology-Tableau-<COLOR>.svg)](https://shields.io/)
 
 # Marketing Mix Modelling Project
 This is an end-to-end project on marketing mix modelling of a Chinese branch US-based female quick fashion brand on data between 2014 and 2017. 
