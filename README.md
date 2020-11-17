@@ -34,7 +34,7 @@ Final presentation deck can be viewed here [(Powerpoint)](final_presentation.pdf
 
 
 ## Data Description
-Data [(link)]() is limited to header and 1 line of encoded value.
+Data [(link)](data) is limited to header and 1 line of encoded value.
 * Sales
     - MMM_Sales_Raw.csv
 * Marketing activity
@@ -58,31 +58,43 @@ Data [(link)]() is limited to header and 1 line of encoded value.
 
 
 ## MySQL ETL pipeline for preprocessing
-Aggregated all teams' marketing activities in MySQL server [(MySQL code)](MySQL/data_preprocess.sql).
+* Aggregated marketing activities for MMM model & side diagnosis in MySQL server [(MySQL code)](MySQL/data_preprocess.sql).
+* Spending is added in R section
+```bash
+├── Sales
+├── FacebookImpression 
+│   ├── Total
+│   ├── Branding
+│   ├── Holiday
+│   └── Other
+├── Google Ad Search Impressions
+│   ├── Total
+│   ├── Branding
+│   ├── AlwaysOn
+│   └── Website
+├── Display
+│   ├── Total
+│   ├── Branding
+│   ├── AlwaysOn
+│   ├── Website
+│   └── Holiday
+├── WeChat
+│   ├── Total
+│   ├── Article
+│   ├── Moment
+│   └── Other
+├── National TV
+├── Magazine
+├── Competitor
+├── Sales Event
+├── Black Friday
+├── July 4th
+└── CCI
+```
 * To make ETL more robust, 2015-data is preloaded, and 2017-data with 6-month overlap is added later.
 * Only select 1-3 drivers for each channel for simplicity of this project.
 * data is aggregated on weekly level to reduce noise and overfitting.
-* Other detail can be found in sql notes
-```bash
-├── app
-│   ├── css
-│   │   ├── **/*.css
-│   ├── favicon.ico
-│   ├── images
-│   ├── index.html
-│   ├── js
-│   │   ├── **/*.js
-│   └── partials/template
-├── dist (or build)
-├── node_modules
-├── bower_components (if using bower)
-├── test
-├── Gruntfile.js/gulpfile.js
-├── README.md
-├── package.json
-├── bower.json (if using bower)
-└── .gitignore
-```
+* Other detail can be found in MySQL notes
 
 
 ## Data Transformation in R
