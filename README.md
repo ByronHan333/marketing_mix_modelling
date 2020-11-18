@@ -31,7 +31,7 @@ This is an end-to-end project on marketing mix modelling of a Chinese branch US-
 -->
 
 ## Table of Content
-* [Data Description](#data-description)
+* [Background and Data Description](#Background-and-Data-Description)
 * [MySQL ETL pipeline for preprocessing](#MySQL-ETL-pipeline-for-preprocessing)
 * [Data Transformation in R](#Data-Transformation-in-R) 
 * [Model Selection and Evaluation](#Model-Selection-and-Evaluation)
@@ -41,8 +41,18 @@ This is an end-to-end project on marketing mix modelling of a Chinese branch US-
 * [Final Presentation](#Final-Presentation)
 
 
-## Data Description
-Data are sales, marketing and spending activities of the US-based fashion design brand between 2014 and 2017.
+## Background and Data Description
+A US based fashion design company has sales data, marketing activities and spending data, events data between 2014 and 2017.
+
+Marketing and sales team want to understand:
+* What are the impacts of different marketing channels on our sales?
+* How are the marketing channels performing in 2017 compared to 2016?
+* What are the effectiveness and efficiency (ROI) for each channel?
+* How should we optimize spending on difference marketing channels in 2018?
+* What will the predicted sales be in 2018?
+
+So I use Marketing Mix Model to tackle these problems.
+
 Data example[(link)](data) is limited to header and 1 line only.
 ```bash
 ├── Sales: 
